@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-
+import { Link } from "react-router-dom";
 //
 import config from "../../../config";
 import styles from "./Header.module.scss";
@@ -7,34 +7,36 @@ import styles from "./Header.module.scss";
 const cx = classNames.bind(styles);
 
 const User = ({ icon }) => {
-  const user = !!localStorage.getItem("user");
-  const role = localStorage.getItem("role");
-  // const email = localStorage.getItem("email");
-  const lastName = localStorage.getItem("lastName");
-  const firstName = localStorage.getItem("firstName");
+  const user = false;
+  const role = false;
+  const lastName = 1;
+  const firstName = 1;
+  // const user = !!localStorage.getItem("user");
+  // const role = localStorage.getItem("role");
+  // // const email = localStorage.getItem("email");
+  // const lastName = localStorage.getItem("lastName");
+  // const firstName = localStorage.getItem("firstName");
   return (
     <div className={cx("social-category-user")}>
       {user ? (
-        <div className={cx("social-category-link")} href={`/${config.routes.login}`}>
-          {icon}
-        </div>
+        <div className={cx("social-category-link")}>{icon}</div>
       ) : (
-        <a className={cx("social-category-link")} href={`/${config.routes.login}`}>
+        <Link className={cx("social-category-link")} to={`/${config.routes.login}`}>
           {icon}
-        </a>
+        </Link>
       )}
 
       <div className={cx("subnav-user")}>
         {/* no user */}
         {!user && (
-          <a className={cx("subnav-user-link")} href={`/${config.routes.register}`}>
+          <Link className={cx("subnav-user-link")} to={`/${config.routes.register}`}>
             Tạo tài khoản ngay
-          </a>
+          </Link>
         )}
         {!user && (
-          <a className={cx("subnav-user-link")} href={`/${config.routes.login}`}>
+          <Link className={cx("subnav-user-link")} to={`/${config.routes.login}`}>
             Đăng nhập
-          </a>
+          </Link>
         )}
         {/* exist user */}
         {user && role === "user" && (

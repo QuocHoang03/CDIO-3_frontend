@@ -90,6 +90,9 @@
             }
 
             .btn-search {
+                display         : flex;
+                align-items     : center;
+                justify-content : center;
                 position        : absolute;
                 width           : 60px;
                 height          : 34px;
@@ -110,7 +113,11 @@
             }
 
             .btn-search:hover {
-                opacity: 0.8;
+                opacity: 0.9;
+            }
+
+            .btn-search:hover .btn-search-icon {
+                color: var(--primary);
             }
         }
 

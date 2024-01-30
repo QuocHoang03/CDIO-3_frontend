@@ -11,7 +11,7 @@
     display            : flex;
     align-items        : center;
     justify-content    : center;
-    height             : 84px;
+    height             : 74px;
     // background-color: #515154;
     background-color   : #161616;
 }
@@ -122,6 +122,9 @@
             height  : 20px;
         }
 
+        .menu-category-link-absolute-a:hover {
+            color: var(--primary);
+        }
 
     }
 
@@ -130,7 +133,7 @@
     }
 
     .menu-category:hover .menu-category-link {
-        color: #ffba00;
+        color: var(--primary);
     }
 
     .menu-category:hover .menu-category-link-absolute {
@@ -199,6 +202,7 @@
             background-color: #fff;
 
             .subnav-user-link {
+                cursor         : pointer;
                 display        : flex;
                 align-items    : center;
                 justify-content: flex-start;
@@ -211,7 +215,7 @@
             }
 
             .subnav-user-link:hover {
-                color: #0066CC;
+                color: var(--primary);
             }
         }
 
@@ -236,6 +240,6 @@
     }
 
     .social-category:hover .social-category-link {
-        color: #ffba00;
+        color: var(--primary);
     }
 }

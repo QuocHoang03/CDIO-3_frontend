@@ -2,15 +2,16 @@ import classNames from "classnames/bind";
 import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState, createContext } from "react";
+import { Link } from "react-router-dom";
 
 //
 import config from "../../../config";
 import styles from "./Header.module.scss";
 import HeaderItem from "./HeaderItem";
-import DichVu from "./DichVu";
-import TinTuc from "./TinTuc";
 import User from "./User";
 import Search from "../Search/Search";
+import BaoGia from "./BaoGia";
+import DuAn from "./DuAn";
 
 //
 const cx = classNames.bind(styles);
@@ -45,14 +46,12 @@ const Header = () => {
         </div>
         {/* menu category */}
         <div className={cx("navbar-item-menu")}>
-          <HeaderItem name={"TRANG CHỦ"} linkUrl={"trang-chu"} />
-          <HeaderItem name={"DỊCH VỤ"} linkUrl={"dich-vu"} />
-          <HeaderItem name={"DỰ ÁN"} linkUrl={"du-an"} />
-          <HeaderItem name={"BÁO GIÁ"} linkUrl={"bao-gia"} />
+          <HeaderItem name={"TRANG CHỦ"} linkUrl={""} />
+          <DuAn name={"Dự án"} linkUrl={"du-an"} icon={<MdKeyboardArrowDown />} />
+          <HeaderItem name={"DỊCH VỤ"} linkUrl={"bao-gia"} />
+          <BaoGia name={"Báo giá"} linkUrl={"bao-gia"} icon={<MdKeyboardArrowDown />} />
           <HeaderItem name={"Phản hồi"} linkUrl={"phan-hoi"} />
           <HeaderItem name={"Tuyển dụng"} linkUrl={"tuyen-dung"} />
-          {/* <DichVu name={"Dịch vụ"} linkUrl={"dich-vu"} icon={<MdKeyboardArrowDown />} />
-          <TinTuc name={"Tin tức"} linkUrl={"tin-tuc"} icon={<MdKeyboardArrowDown />} /> */}
         </div>
         {/* social */}
         <div className={cx("navbar-item-social")}>
@@ -62,15 +61,15 @@ const Header = () => {
             </a>
           </div>
           <div className={cx("social-category")}>
-            <a href="/" className={cx("social-category-link")} onClick={handleSearchFullscreen}>
+            <Link to="/" className={cx("social-category-link")} onClick={handleSearchFullscreen}>
               <FiSearch />
-            </a>
+            </Link>
           </div>
           <div className={cx("social-category")}>
-            <a href={`${config.routes.cart}`} className={cx("social-category-link")}>
+            <Link to={`/${config.routes.cart}`} className={cx("social-category-link")}>
               <FiShoppingCart />
               <div className={cx("car-quantity")}>0</div>
-            </a>
+            </Link>
           </div>
           <div className={cx("social-category")}>
             <User icon={<FiUser />} />
