@@ -36,13 +36,13 @@ const Header = () => {
       <nav className={cx("navbar")}>
         {/* logo */}
         <div className={cx("navbar-item-logo")}>
-          <a className={cx("logo-link")} href="/">
+          <Link className={cx("logo-link")} to="/">
             <img
               className={cx("logo")}
               src="https://sbshouse.vn/wp-content/uploads/2022/07/logo.svg"
               alt="logo"
             />
-          </a>
+          </Link>
         </div>
         {/* menu category */}
         <div className={cx("navbar-item-menu")}>
