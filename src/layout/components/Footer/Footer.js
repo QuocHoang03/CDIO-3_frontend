@@ -14,7 +14,7 @@ const Footer = () => {
         {/*  */}
         <div className={cx("footer-new-letter-bg")}>
           <div className={cx("footer-new-letter")}>
-            <div className={cx("heading-letter")}>Đăng ký nhận tin từ ShopDunk</div>
+            <div className={cx("heading-letter")}>Đăng ký nhận tin từ WanFit</div>
             <div className={cx("content-letter")}>
               Thông tin sản phẩm mới nhất và chương trình khuyến mãi
             </div>
@@ -41,15 +41,15 @@ const Footer = () => {
                 <a className={cx("logo-link")} href="/">
                   <img
                     className={cx("logo")}
-                    src="https://shopdunk.com/images/thumbs/0012445_Logo_ShopDunk.png"
+                    src="https://sbshouse.vn/wp-content/uploads/2022/07/logo.svg"
                     alt="logo"
                   />
                 </a>
               </div>
               <div className={cx("topic-block")}>
-                Năm 2020, WanFit trở thành đại lý ủy quyền của Apple. Chúng tôi phát triển chuỗi cửa
-                hàng tiêu chuẩn và Apple Mono Store nhằm mang đến trải nghiệm tốt nhất về sản phẩm
-                và dịch vụ của Apple cho người dùng Việt Nam.
+                Năm 2020, WanFit trở thành đại lý có tiềm năng. Chúng tôi phát triển chuỗi cửa hàng
+                tiêu chuẩn và WanFit nhằm mang đến trải nghiệm tốt nhất về sản phẩm và dịch vụ của
+                WanFit cho người dùng Việt Nam.
               </div>
               <div className={cx("social")}>
                 <a
@@ -71,34 +71,34 @@ const Footer = () => {
             </div>
             {/*  */}
             <div className={cx("upper-information")}>
-              <div className={cx("title")}>Thông tin</div>
+              <div className={cx("title")}>Dự án</div>
               <div className={cx("list")}>
                 <a className={cx("list-item")} href="/">
-                  Tin Tức
+                  Nhà cấp 4 đẹp
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Giới thiệu
+                  Nhà phố đẹp
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Check lMEl
+                  Nhà 2 tầng
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Phương thức thanh toán
+                  Nhà 3 tầng
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Thuê điểm bán lẻ
+                  Nhà 4 tầng
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Bảo hành và sửa chữa
+                  Nhà 5 tầng
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Tuyển dụng
+                  Nhà 6 tầng
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Đánh giá chất lượng, khiếu nại
+                  Mẫu biệt thự đẹp
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Tra cứu hoá đơn điện tử
+                  Mẫu khách sạn đẹp
                 </a>
               </div>
             </div>
@@ -106,9 +106,6 @@ const Footer = () => {
             <div className={cx("upper-customer-service")}>
               <div className={cx("title")}>Chính sách</div>
               <div className={cx("list")}>
-                <a className={cx("list-item")} href="/">
-                  Thu cũ đổi mới
-                </a>
                 <a className={cx("list-item")} href="/">
                   Giao hàng
                 </a>
@@ -152,18 +149,14 @@ const Footer = () => {
                   Hệ thống cửa hàng
                 </a>
                 <a className={cx("list-item")} href="/">
-                  Tìm Store trên Google Map
-                </a>
-                <a className={cx("list-item")} href="/">
-                  Mua Hàng: 1900.2003
+                  Mua Hàng: 0971955144
                 </a>
                 <span className={cx("list-item-location")}>
-                  Nhánh 1: khu vực Hà Nội và các tỉnh phía bắc
+                  Chi nhánh 1: khu vực Hà Nội và các tỉnh phía bắc
                 </span>
                 <span className={cx("list-item-location")}>
-                  Nhánh 2: khu vực Hồ Chí Minh và các tỉnh phía nam
+                  Chi nhánh 2: khu vực Hồ Chí Minh và các tỉnh phía nam
                 </span>
-                <span className={cx("list-item-location")}>Nhánh 1: Khiếu nại và góp ý</span>
                 <a className={cx("list-item")} href="/">
                   Doanh nghiệp: <span className={cx("list-item-tel")}>0971.955.144</span>
                 </a>

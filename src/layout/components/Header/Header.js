@@ -48,7 +48,7 @@ const Header = () => {
         <div className={cx("navbar-item-menu")}>
           <HeaderItem name={"TRANG CHỦ"} linkUrl={""} />
           <DuAn name={"Dự án"} linkUrl={"du-an"} icon={<MdKeyboardArrowDown />} />
-          <HeaderItem name={"DỊCH VỤ"} linkUrl={"bao-gia"} />
+          <HeaderItem name={"DỊCH VỤ"} linkUrl={"dich-vu"} />
           <BaoGia name={"Báo giá"} linkUrl={"bao-gia"} icon={<MdKeyboardArrowDown />} />
           <HeaderItem name={"Phản hồi"} linkUrl={"phan-hoi"} />
           <HeaderItem name={"Tuyển dụng"} linkUrl={"tuyen-dung"} />

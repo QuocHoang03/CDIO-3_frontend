@@ -1,6 +1,6 @@
 import config from "../config";
 import DefaultLayout from "../layout/DefaultLayout";
-import HomeLayout from "../layout/HomeLayout";
+// import HomeLayout from "../layout/HomeLayout";
 
 // Page
 import Home from "../Pages/Home";
@@ -36,32 +36,32 @@ const publicRoutes = [
   {
     path: config.routes.baoGia,
     component: BaoGia,
-    layout: HomeLayout,
+    layout: DefaultLayout,
   },
   {
     path: config.routes.phanHoi,
     component: PhanHoi,
-    layout: HomeLayout,
+    layout: DefaultLayout,
   },
   {
     path: config.routes.tuyenDung,
     component: TuyenDung,
-    layout: HomeLayout,
+    layout: DefaultLayout,
   },
   {
     path: config.routes.cart,
     component: Cart,
-    layout: HomeLayout,
+    layout: DefaultLayout,
   },
   {
     path: config.routes.login,
     component: Login,
-    layout: HomeLayout,
+    layout: DefaultLayout,
   },
   {
     path: config.routes.register,
     component: Register,
-    layout: HomeLayout,
+    layout: DefaultLayout,
   },
 ];
 
