@@ -1,4 +1,5 @@
 const routes = {
+  // routes
   home: "/",
   dichVu: "dich-vu",
   duAn: "du-an",
@@ -8,7 +9,12 @@ const routes = {
   cart: "cart",
   register: "register",
   login: "login",
-  // Sub routes
+  // admin
+  homeAdmin: "admin",
+  orderAdmin: "admin/order",
+  productAdmin: "admin/products",
+  settingAdmin: "admin/settings",
+  signOutAdmin: "admin/sign-out",
 };
 
 export default routes;

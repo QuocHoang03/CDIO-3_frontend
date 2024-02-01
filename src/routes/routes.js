@@ -1,5 +1,6 @@
 import config from "../config";
 import DefaultLayout from "../layout/DefaultLayout";
+import AdminLayout from "../layout/AdminLayout";
 // import HomeLayout from "../layout/HomeLayout";
 
 // Page
@@ -13,7 +14,12 @@ import Cart from "../Pages/Cart";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 
-// Sub Page
+// Admin Page
+import HomeAdmin from "../PageAdmin/Home";
+import OrderAdmin from "../PageAdmin/Order";
+import ProductAdmin from "../PageAdmin/Products";
+import SettingAdmin from "../PageAdmin/Settings";
+import SignOutAdmin from "../PageAdmin/SignOut";
 
 // Public routes
 const publicRoutes = [
@@ -62,6 +68,32 @@ const publicRoutes = [
     path: config.routes.register,
     component: Register,
     layout: DefaultLayout,
+  },
+  // Admin
+  {
+    path: config.routes.homeAdmin,
+    component: HomeAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.orderAdmin,
+    component: OrderAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.productAdmin,
+    component: ProductAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.settingAdmin,
+    component: SettingAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.signOutAdmin,
+    component: SignOutAdmin,
+    layout: AdminLayout,
   },
 ];
 

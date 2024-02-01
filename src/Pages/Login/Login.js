@@ -15,7 +15,22 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+  const isCheckInputs = () => {
+    if (!data.email) {
+      toast("Vui lòng nhập email");
+      return false;
+    }
+    if (!data.password) {
+      toast("Vui lòng nhập mật khẩu");
+      return false;
+    }
+    let regular = /\S+@\S+\.\S+/;
+    if (!regular.test(data.email)) {
+      toast("Địa chỉ email không hợp lệ");
+      return false;
+    }
+    return true;
+  };
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => {
@@ -28,6 +43,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let isCheck = isCheckInputs();
+    if (isCheck === true) {
+      console.log(data);
+    }
   };
   return (
     <div className={cx("wrapper")}>
@@ -46,7 +65,7 @@ const Login = () => {
             <input
               className={cx("login-item-input")}
               name="email"
-              type="email"
+              type="text"
               onChange={handleOnChange}
             />
           </div>

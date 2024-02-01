@@ -17,12 +17,50 @@ const Register = () => {
   const [data, setData] = useState({
     lastName: "",
     firstName: "",
-    gender: "",
     email: "",
+    sex: "",
+    address: "",
     mobile: "",
     password: "",
     confirmPassword: "",
   });
+
+  const isCheckInputs = () => {
+    if (!data.lastName) {
+      toast("Vui lòng nhập họ");
+      return false;
+    }
+    if (!data.firstName) {
+      toast("Vui lòng nhập tên");
+      return false;
+    }
+    if (!data.email) {
+      toast("Vui lòng nhập email");
+      return false;
+    }
+    if (!data.sex) {
+      toast("Vui lòng chọn giới tính");
+      return false;
+    }
+    if (!data.mobile) {
+      toast("Vui lòng nhập số điện thoại");
+      return false;
+    }
+    if (!data.password) {
+      toast("Vui lòng nhập mật khẩu");
+      return false;
+    }
+    if (data.password !== data.confirmPassword) {
+      toast("Mật khẩu không trùng nhau");
+      return false;
+    }
+    let regular = /\S+@\S+\.\S+/;
+    if (!regular.test(data.email)) {
+      toast("Địa chỉ email không hợp lệ");
+      return false;
+    }
+    return true;
+  };
 
   // handle
   const handleOnChange = (e) => {
@@ -42,8 +80,13 @@ const Register = () => {
   const handleShowConfirmPassword = () => {
     setShowConfirmPassword((prev) => !prev);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let isCheck = isCheckInputs();
+    if (isCheck === true) {
+      console.log(data);
+    }
   };
   return (
     <div className={cx("wrapper")}>
@@ -57,6 +100,7 @@ const Register = () => {
       <div className={cx("register")}>
         <form className={cx("form-register")} onSubmit={handleSubmit}>
           <h1 className={cx("heading")}>Đăng Ký</h1>
+          {/* last name */}
           <div className={cx("register-item")}>
             <label className={cx("register-item-label")}>Nhập họ:</label>
             <input
@@ -66,6 +110,7 @@ const Register = () => {
               onChange={handleOnChange}
             />
           </div>
+          {/* first name */}
           <div className={cx("register-item")}>
             <label className={cx("register-item-label")}>Nhập tên:</label>
             <input
@@ -75,6 +120,17 @@ const Register = () => {
               onChange={handleOnChange}
             />
           </div>
+          {/* email */}
+          <div className={cx("register-item")}>
+            <label className={cx("register-item-label")}>E-mail:</label>
+            <input
+              className={cx("register-item-input")}
+              name="email"
+              type="text"
+              onChange={handleOnChange}
+            />
+          </div>
+          {/* sex */}
           <div className={cx("register-male")}>
             <div className={cx("register-male-title-block")}>
               <label className={cx("register-male-title")}>Giới tính:</label>
@@ -85,7 +141,7 @@ const Register = () => {
                 className={cx("register-male-input")}
                 value="male"
                 type="radio"
-                name="gender"
+                name="sex"
                 onChange={handleOnChange}
               />
               <label htmlFor="gender-male" className={cx("register-male-label")}>
@@ -98,7 +154,7 @@ const Register = () => {
                 className={cx("register-male-input")}
                 value="female"
                 type="radio"
-                name="gender"
+                name="sex"
                 onChange={handleOnChange}
               />
               <label htmlFor="gender-female" className={cx("register-male-label")}>
@@ -106,15 +162,17 @@ const Register = () => {
               </label>
             </div>
           </div>
-          <div className={cx("register-item")}>
-            <label className={cx("register-item-label")}>E-mail:</label>
+          {/* address */}
+          {/* <div className={cx("register-item")}>
+            <label className={cx("register-item-label")}>Địa chỉ:</label>
             <input
               className={cx("register-item-input")}
-              name="email"
-              type="email"
+              name="address"
+              type="text"
               onChange={handleOnChange}
             />
-          </div>
+          </div> */}
+          {/* phone */}
           <div className={cx("register-item")}>
             <label className={cx("register-item-label")}>Điện thoại:</label>
             <input
@@ -124,6 +182,7 @@ const Register = () => {
               onChange={handleOnChange}
             />
           </div>
+          {/* password */}
           <div className={cx("register-item")}>
             <label className={cx("register-item-label")}>Mật khẩu:</label>
             <input
@@ -138,6 +197,7 @@ const Register = () => {
               </div>
             )}
           </div>
+          {/* confirm password */}
           <div className={cx("register-item")}>
             <label className={cx("register-item-label")}>Nhập lại mật khẩu:</label>
             <input
@@ -152,7 +212,7 @@ const Register = () => {
               </div>
             )}
           </div>
-          <button type="submit" className={cx("btnSubmit")}>
+          <button onClick={handleSubmit} type="submit" className={cx("btnSubmit")}>
             Đăng ký
           </button>
           <div className={cx("login")}>
