@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./SliderAdmin.module.scss";
 import { Link } from "react-router-dom";
