@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { FaFacebookF } from "react-icons/fa";
 import { SiYoutube, SiZalo } from "react-icons/si";
+import { AiOutlineMail } from "react-icons/ai";
 
 //
 import styles from "./Footer.module.scss";
@@ -11,26 +12,6 @@ const Footer = () => {
   return (
     <footer className={cx("wrapper")}>
       <div className={cx("footer")}>
-        {/*  */}
-        <div className={cx("footer-new-letter-bg")}>
-          <div className={cx("footer-new-letter")}>
-            <div className={cx("heading-letter")}>Đăng ký nhận tin từ WanFit</div>
-            <div className={cx("content-letter")}>
-              Thông tin sản phẩm mới nhất và chương trình khuyến mãi
-            </div>
-            <div className={cx("email-letter")}>
-              <input
-                id="send-your-email"
-                className={cx("email-letter-input")}
-                name="sendYourEmail"
-                placeholder="Email của bạn"
-              />
-              <button htmlFor="send-your-email" className={cx("email-letter-register")}>
-                <label>Đăng ký</label>
-              </button>
-            </div>
-          </div>
-        </div>
         {/*  */}
         <div className={cx("information")}>
           {/*  */}

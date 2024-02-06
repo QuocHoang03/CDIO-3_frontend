@@ -9,6 +9,11 @@ const routes = {
   cart: "cart",
   register: "register",
   login: "login",
+  // sub page
+  nhaCap4Dep: "nha-cap-4-dep",
+  nhaPhoDep: "nha-pho-dep",
+  mauBietThuDep: "mau-biet-thu-dep",
+  mauKhachSanDep: "mau-khach-san-dep",
   // admin
   homeAdmin: "admin",
   orderAdmin: "admin/order",

@@ -1,0 +1,150 @@
+.video-block {
+    margin-top: -60px;
+    width     : 100%;
+    display   : block;
+
+    .video-source {
+        display        : flex;
+        justify-content: center;
+        width          : 100%;
+    }
+}
+
+.video-slice {
+    position        : relative;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    margin-top      : -250px;
+    width           : 100%;
+    background-color: rgb(255, 255, 255);
+
+    .slice-container {
+        display       : flex;
+        flex-direction: column;
+        align-items   : center;
+        width         : var(--with-global);
+
+        .search-option {
+            display      : flex;
+            top          : -36px;
+            left         : 50%;
+            transform    : translateX(-50%);
+            position     : absolute;
+            width        : 770px;
+            height       : 72px;
+            padding      : 12px;
+            background   : #FFFFFF;
+            box-shadow   : 0px 16px 32px 1px rgba(0, 0, 0, 0.15);
+            border-radius: 40px;
+
+            .search-item {
+                display       : flex;
+                flex          : 1;
+                flex-direction: column;
+                align-items   : flex-start;
+                padding-left  : 24px;
+                border-right  : solid 1px #E9ECF4;
+
+                .search-title {
+                    margin-bottom: 4px;
+                    font-weight  : 500;
+                    font-size    : 1.2rem;
+                }
+
+                .search-select {
+                    margin-left       : -4.5px;
+                    color             : #6F788E;
+                    font-size         : 1.4rem;
+                    border            : none;
+                    -webkit-appearance: none;
+                }
+
+                .search-select:focus-visible {
+                    outline: none;
+                }
+            }
+
+            .search-btn {
+                display           : flex;
+                justify-content   : center;
+                align-items       : center;
+                width             : 48px;
+                height            : 48px;
+                margin-left       : 24px;
+                border            : none;
+                border-radius     : 50%;
+                // background     : linear-gradient(0deg, #f67d24, #ff3300);
+                background        : linear-gradient(0deg, var(--primary), #f97c22);
+
+                .search-btn-icon {
+                    font-size: 2rem;
+                    color    : #FFF;
+
+                }
+            }
+        }
+
+        .select-menu {
+            display        : flex;
+            width          : 100%;
+            justify-content: center;
+            margin         : 100px 0;
+
+            .item {
+                display        : flex;
+                flex-direction : column;
+                align-items    : center;
+                width          : 200px;
+                height         : 280px;
+                padding        : 20px;
+                margin         : 8px;
+                text-decoration: none;
+                cursor         : pointer;
+                border         : 1px solid #E9ECF4;
+
+                .img-item {
+                    display         : flex;
+                    justify-content : center;
+                    align-items     : center;
+                    width           : 100px;
+                    height          : 100px;
+                    border-radius   : 50%;
+                    background-color: var(--primary);
+                    border          : 6px solid #ffffff;
+                    box-shadow      : 0px 0px 0px 3px var(--primary);
+
+                    .img {
+                        width : 50px;
+                        height: 50px;
+                    }
+                }
+
+                .title-item {
+                    font-size  : 1.5rem;
+                    margin     : 16px 0 8px;
+                    font-weight: 500;
+                    color      : #000;
+                }
+
+                .content-item {
+                    font-size : 1.2rem;
+                    text-align: center;
+                    color     : #7a7a7a;
+                }
+            }
+
+            .item:hover .title-item {
+                color: var(--primary);
+            }
+        }
+    }
+
+}
+
+.container {
+    width         : var(--with-global);
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+}

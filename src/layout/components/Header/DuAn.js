@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 //
 // import config from "../../../config";
 import styles from "./Header.module.scss";
+import config from "../../../config";
 
 const cx = classNames.bind(styles);
 const DuAn = ({ name, linkUrl, icon }) => {
@@ -16,16 +17,22 @@ const DuAn = ({ name, linkUrl, icon }) => {
       </Link>
       {icon && (
         <div className={cx("menu-category-link-absolute")}>
-          <Link className={cx("menu-category-link-absolute-a")} to={`/`}>
+          <Link className={cx("menu-category-link-absolute-a")} to={`/${config.routes.nhaCap4Dep}`}>
             Nhà cấp 4 đẹp
           </Link>
-          <Link className={cx("menu-category-link-absolute-a")} to={`/`}>
+          <Link className={cx("menu-category-link-absolute-a")} to={`/${config.routes.nhaPhoDep}`}>
             Nhà phố đẹp
           </Link>
-          <Link className={cx("menu-category-link-absolute-a")} to={`/`}>
+          <Link
+            className={cx("menu-category-link-absolute-a")}
+            to={`/${config.routes.mauBietThuDep}`}
+          >
             Mẫu biệt thự đẹp
           </Link>
-          <Link className={cx("menu-category-link-absolute-a")} to={`/`}>
+          <Link
+            className={cx("menu-category-link-absolute-a")}
+            to={`/${config.routes.mauKhachSanDep}`}
+          >
             Mẫu khách sạn đẹp
           </Link>
         </div>

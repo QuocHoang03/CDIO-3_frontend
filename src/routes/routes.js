@@ -1,5 +1,6 @@
 import config from "../config";
 import DefaultLayout from "../layout/DefaultLayout";
+import HeadlessLayout from "../layout/HeadlessLayout";
 import AdminLayout from "../layout/AdminLayout";
 // import HomeLayout from "../layout/HomeLayout";
 
@@ -13,6 +14,12 @@ import TuyenDung from "../Pages/TuyenDung";
 import Cart from "../Pages/Cart";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
+
+// Sub page
+import NhaCap4 from "../Pages/NhaCap4";
+import NhaPho from "../Pages/NhaPho";
+import MauBietThu from "../Pages/MauBietThu";
+import MauKhachSan from "../Pages/MauKhachSan";
 
 // Admin Page
 import HomeAdmin from "../PageAdmin/Home";
@@ -62,11 +69,32 @@ const publicRoutes = [
   {
     path: config.routes.login,
     component: Login,
-    layout: DefaultLayout,
+    layout: HeadlessLayout,
   },
   {
     path: config.routes.register,
     component: Register,
+    layout: HeadlessLayout,
+  },
+  // Sub page
+  {
+    path: config.routes.nhaCap4Dep,
+    component: NhaCap4,
+    layout: DefaultLayout,
+  },
+  {
+    path: config.routes.nhaPhoDep,
+    component: NhaPho,
+    layout: DefaultLayout,
+  },
+  {
+    path: config.routes.mauBietThuDep,
+    component: MauBietThu,
+    layout: DefaultLayout,
+  },
+  {
+    path: config.routes.mauKhachSanDep,
+    component: MauKhachSan,
     layout: DefaultLayout,
   },
   // Admin
