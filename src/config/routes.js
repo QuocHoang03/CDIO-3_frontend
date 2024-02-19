@@ -1,6 +1,7 @@
 const routes = {
   // routes
   home: "/",
+  homeDetail: "/:slug",
   dichVu: "dich-vu",
   duAn: "du-an",
   baoGia: "bao-gia",

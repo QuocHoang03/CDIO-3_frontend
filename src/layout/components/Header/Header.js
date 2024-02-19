@@ -41,7 +41,7 @@ const Header = () => {
           <Link className={cx("logo-link")} to="/">
             <img
               className={cx("logo")}
-              src="https://sbshouse.vn/wp-content/uploads/2022/07/logo.svg"
+              src="https://res.cloudinary.com/daofedrqe/image/upload/v1707379342/wanfit_apple_imageAvt/mhf6siicj77fofhuvfcm.png"
               alt="logo"
             />
           </Link>

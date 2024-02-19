@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +12,9 @@ const cx = classNames.bind(styles);
 
 const Register = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [showPassword, setShowPassword] = useState([false]);
   const [showConfirmPassword, setShowConfirmPassword] = useState([false]);
   const [data, setData] = useState({

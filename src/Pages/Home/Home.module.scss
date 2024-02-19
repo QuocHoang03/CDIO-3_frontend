@@ -17,7 +17,7 @@
     align-items     : center;
     margin-top      : -250px;
     width           : 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--background-primary);
 
     .slice-container {
         display       : flex;
@@ -47,17 +47,20 @@
                 border-right  : solid 1px #E9ECF4;
 
                 .search-title {
-                    margin-bottom: 4px;
-                    font-weight  : 500;
-                    font-size    : 1.2rem;
+                    font-weight: 500;
+                    font-size  : 1.2rem;
+                    cursor     : pointer;
                 }
 
                 .search-select {
+                    flex              : 1;
                     margin-left       : -4.5px;
                     color             : #6F788E;
                     font-size         : 1.4rem;
                     border            : none;
+                    padding-top       : 4px;
                     -webkit-appearance: none;
+                    cursor            : pointer;
                 }
 
                 .search-select:focus-visible {
@@ -66,16 +69,16 @@
             }
 
             .search-btn {
-                display           : flex;
-                justify-content   : center;
-                align-items       : center;
-                width             : 48px;
-                height            : 48px;
-                margin-left       : 24px;
-                border            : none;
-                border-radius     : 50%;
-                // background     : linear-gradient(0deg, #f67d24, #ff3300);
-                background        : linear-gradient(0deg, var(--primary), #f97c22);
+                display        : flex;
+                justify-content: center;
+                align-items    : center;
+                width          : 48px;
+                height         : 48px;
+                margin-left    : 24px;
+                border         : none;
+                border-radius  : 50%;
+                background     : linear-gradient(0deg, var(--primary), #f97c22);
+                cursor         : pointer;
 
                 .search-btn-icon {
                     font-size: 2rem;
@@ -89,19 +92,20 @@
             display        : flex;
             width          : 100%;
             justify-content: center;
-            margin         : 100px 0;
+            margin         : 44px 0;
 
             .item {
-                display        : flex;
-                flex-direction : column;
-                align-items    : center;
-                width          : 200px;
-                height         : 280px;
-                padding        : 20px;
-                margin         : 8px;
-                text-decoration: none;
-                cursor         : pointer;
-                border         : 1px solid #E9ECF4;
+                display         : flex;
+                flex-direction  : column;
+                align-items     : center;
+                width           : 200px;
+                height          : 280px;
+                padding         : 20px;
+                margin          : 8px;
+                text-decoration : none;
+                cursor          : pointer;
+                background-color: #fff;
+                border          : 1px solid #E9ECF4;
 
                 .img-item {
                     display         : flex;
@@ -147,4 +151,173 @@
     display       : flex;
     flex-direction: column;
     align-items   : center;
+    margin-bottom : 44px;
+
+    .heading {
+        position     : relative;
+        color        : var(--primary);
+        font-size    : 3rem;
+        font-weight  : 600;
+        line-height  : 36px;
+        margin-bottom: 40px;
+    }
+
+    .heading::before {
+        position        : absolute;
+        content         : "";
+        bottom          : -10px;
+        left            : 50%;
+        transform       : translateX(-50%);
+        width           : 200px;
+        height          : 1px;
+        background-color: var(--primary);
+    }
+
+    .product-list {
+        width    : 100%;
+        display  : flex;
+        flex-wrap: wrap;
+        gap      : 2rem;
+    }
+}
+
+.bg-feedback {
+    display         : flex;
+    justify-content : center;
+    width           : 100%;
+    padding         : 70px 0;
+    background-color: #000;
+
+    .feedback {
+        position      : relative;
+        width         : var(--with-global);
+        display       : flex;
+        flex-direction: column;
+        align-items   : center;
+
+        .heading {
+            position     : relative;
+            color        : var(--primary);
+            font-size    : 3rem;
+            font-weight  : 600;
+            line-height  : 36px;
+            margin-bottom: 40px;
+        }
+
+        .heading::before {
+            position        : absolute;
+            content         : "";
+            bottom          : -10px;
+            left            : 50%;
+            transform       : translateX(-50%);
+            width           : 150px;
+            height          : 1px;
+            background-color: var(--primary);
+        }
+
+        .slider {
+            display        : flex;
+            width          : 100%;
+            min-height     : 200px;
+            overflow-x     : scroll;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+
+            .block-feedback {
+                display       : flex;
+                flex-direction: column;
+
+                .message-feedback {
+                    position        : relative;
+                    width           : 350px;
+                    height          : 190px;
+                    padding         : 30px;
+                    margin-right    : 50px;
+                    margin-bottom   : 50px;
+                    background-color: #FFF;
+
+                    .feedback-icon {
+                        font-size    : 2rem;
+                        margin-bottom: 10px;
+                        color        : var(--primary);
+                    }
+
+                    .feedback-content {
+                        color     : #333;
+                        font-size : 1.4rem;
+                        text-align: justify;
+                    }
+
+                    .feedback-show {
+                        display        : flex;
+                        justify-content: flex-end;
+                        line-height    : 1.4rem;
+                        cursor         : pointer;
+
+                        .show-more {
+                            color        : var(--primary);
+                            font-size    : 1.4rem;
+                            border-bottom: 1px solid;
+                        }
+                    }
+
+                }
+
+                .message-feedback::after {
+                    position     : absolute;
+                    content      : "";
+                    top          : 100%;
+                    left         : 0;
+                    border-right : 30px solid var(--primary);
+                    border-bottom: 30px solid transparent;
+                }
+
+                .feedback-user {
+                    display    : flex;
+                    align-items: center;
+                    height     : 50px;
+
+                    .feedback-avatar {
+                        width        : 50px;
+                        height       : 100%;
+                        margin       : 0 15px 0 25px;
+                        border-radius: 999px;
+                        overflow     : hidden;
+
+                        .feedback-img {
+                            width  : 100%;
+                            display: block;
+                        }
+                    }
+
+                    .feedback-name {
+                        color    : var(--primary);
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+
+        .slider-left-icon {
+            z-index  : 1;
+            position : absolute;
+            top      : 50%;
+            transform: translateY(-50%);
+            right    : calc(100% + 20px);
+            color    : var(--primary);
+            font-size: 3.4rem;
+            cursor   : pointer;
+        }
+
+        .slider-right-icon {
+            z-index  : 1;
+            position : absolute;
+            top      : 50%;
+            transform: translateY(-50%);
+            left     : calc(100% + 20px);
+            color    : var(--primary);
+            font-size: 3.4rem;
+            cursor   : pointer;
+        }
+    }
 }

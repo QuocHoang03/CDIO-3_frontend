@@ -4,6 +4,7 @@
 :root {
     --with-global        : 1200px;
     --primary            : #ffba00;
+    --background-primary : #fff;
     --text-color         : #fff;
     --height-header      : 64px;
     --border-radius-admin: 15px;
@@ -17,6 +18,11 @@
 html {
     font-size      : 62.5%;
     scroll-behavior: smooth;
+}
+
+html,
+body {
+    scroll-behavior: smooth
 }
 
 * {

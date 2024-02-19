@@ -1,16 +1,16 @@
 import classNames from "classnames/bind";
 
 import styles from "./Login.module.scss";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const cx = classNames.bind(styles);
 
 const Login = () => {
-  const navigate = useNavigate();
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [data, setData] = useState({
     email: "",
     password: "",

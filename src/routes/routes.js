@@ -6,6 +6,7 @@ import AdminLayout from "../layout/AdminLayout";
 
 // Page
 import Home from "../Pages/Home";
+import HomeDetail from "../Pages/HomeDetail";
 import DichVu from "../Pages/DichVu";
 import DuAn from "../Pages/DuAn";
 import BaoGia from "../Pages/BaoGia";
@@ -35,6 +36,12 @@ const publicRoutes = [
     path: config.routes.home,
     component: Home,
     layout: DefaultLayout,
+  },
+  {
+    path: config.routes.homeDetail,
+    component: HomeDetail,
+    layout: HeadlessLayout,
+    // layout: DefaultLayout,
   },
   {
     path: config.routes.dichVu,
