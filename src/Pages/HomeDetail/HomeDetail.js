@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./HomeDetail.module.scss";
 import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
-import { FaChevronDown, FaRegHeart, FaRegSquare } from "react-icons/fa";
+import { FaRegSquare } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 
 import {
@@ -16,6 +16,7 @@ import {
   FiDollarSign,
   FiHash,
 } from "react-icons/fi";
+import ContactOrder from "../../layout/components/ContactOrder/ContactOrder";
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,7 @@ const HomeDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const arrDemo = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const arrDemo = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const arrDemo2 = [
     "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
     "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
@@ -194,68 +195,7 @@ const HomeDetail = () => {
           </div>
         </div>
         <div className={cx("contact")}>
-          <form className={cx("contact-form")}>
-            <div className={cx("title")}>Liên hệ đặt hàng</div>
-            {/* name */}
-            <div className={cx("block-input")}>
-              <label className={cx("bl-label")} htmlFor="name">
-                Tên của bạn
-              </label>
-              <input
-                className={cx("bl-input")}
-                id="name"
-                type="text"
-                placeholder="Nhập tên của bạn"
-              />
-            </div>
-            {/* phone */}
-            <div className={cx("block-input")}>
-              <label className={cx("bl-label")} htmlFor="phone">
-                Số điện thoại
-              </label>
-              <input
-                className={cx("bl-input")}
-                id="phone"
-                type="text"
-                placeholder="Nhập số điện thoại"
-              />
-            </div>
-            <div className={cx("two-select")}>
-              {/* province/city */}
-              <div className={cx("block-select", "mr-12")}>
-                <label className={cx("bl-label")} htmlFor="province-city">
-                  Tỉnh/Thành phố *
-                </label>
-                <div className={cx("bl-down")}>
-                  <select className={cx("bl-select")} id="province-city">
-                    <option>- chọn -</option>
-                  </select>
-                  <FaChevronDown className={cx("bl-icon")} />
-                </div>
-              </div>
-              {/* district */}
-              <div className={cx("block-select")}>
-                <label className={cx("bl-label")} htmlFor="district">
-                  Quận huyện *
-                </label>
-                <div className={cx("bl-down")}>
-                  <select className={cx("bl-select")} id="district">
-                    <option>- chọn -</option>
-                  </select>
-                  <FaChevronDown className={cx("bl-icon")} />
-                </div>
-              </div>
-            </div>
-            <div className={cx("sum-price")}>
-              <div className={cx("sum")}>Tổng tiền:</div>
-              <div className={cx("price")}>6,990,000 ₫</div>
-            </div>
-            <p className={cx("note")}>Bạn chưa cần phải thanh toán tiền ở bước này</p>
-            <button className={cx("btn", "cl-primary")}>Liên hệ đặt hàng</button>
-            <button className={cx("btn", "cl-white")}>
-              <FaRegHeart className={cx("icon")} /> Thêm vào hồ sơ yêu thích
-            </button>
-          </form>
+          <ContactOrder />
         </div>
       </div>
       <div className={cx("detail-product")}>

@@ -1,0 +1,17 @@
+.wrapper {
+    width     : var(--with-global);
+    display   : flex;
+    min-height: 200px;
+}
+
+.inner-left {
+    flex            : 1;
+    padding         : 16px;
+    background-color: aqua;
+}
+
+.inner-right {
+    flex            : 3;
+    padding         : 16px;
+    background-color: rgb(196, 108, 26);
+}

@@ -7,7 +7,17 @@ const NhaCap4 = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  return <div className={cx("")}>NhaCap4</div>;
+  return (
+    <div className={cx("wrapper")}>
+      <div className={cx("inner-left")}>111</div>
+      <div className={cx("inner-right")}>
+        <div className={cx("heading")}>
+          <div className={cx("heading")}></div>
+        </div>
+        <div className={cx("")}></div>
+      </div>
+    </div>
+  );
 };
 
 export default NhaCap4;

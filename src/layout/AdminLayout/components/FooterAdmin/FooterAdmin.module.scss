@@ -1,31 +1,14 @@
 .footing {
     .page {
         display        : flex;
-        align-items    : center;
         justify-content: flex-end;
         margin-top     : 20px;
+        height         : 36px;
 
-        .page-list {
-            display         : flex;
-            align-items     : center;
-            justify-content : center;
-            font-weight     : 600;
-            color           : #000;
-            width           : 36px;
-            height          : 36px;
-            border-radius   : 8px;
-            margin          : 0 3px;
-            background-color: #ececef;
-            cursor          : pointer;
-
-            .page-icon {
-                font-size: 1.8rem;
-            }
-
-            &:hover {
-                color           : #fff;
-                background-color: #0066CC;
-            }
+        .hello {
+            --bs-pagination-padding-x: 1rem;
+            --bs-pagination-padding-y: 0.35rem;
+            --bs-pagination-font-size: 1.6rem;
         }
     }
 }

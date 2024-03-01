@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+// import { FaHeart } from "react-icons/fa";
 
 const cx = classNames.bind(styles);
 

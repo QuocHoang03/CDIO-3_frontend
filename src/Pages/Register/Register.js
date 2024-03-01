@@ -1,12 +1,13 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 import styles from "./Register.module.scss";
+import { registerUser } from "../../services/userService";
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,7 @@ const Register = () => {
     email: "",
     sex: "",
     address: "",
-    mobile: "",
+    phone: "",
     password: "",
     confirmPassword: "",
   });
@@ -45,7 +46,7 @@ const Register = () => {
       toast("Vui lòng chọn giới tính");
       return false;
     }
-    if (!data.mobile) {
+    if (!data.phone) {
       toast("Vui lòng nhập số điện thoại");
       return false;
     }
@@ -88,7 +89,13 @@ const Register = () => {
     e.preventDefault();
     let isCheck = isCheckInputs();
     if (isCheck === true) {
-      console.log(data);
+      let response = await registerUser(data);
+      if (+response?.data?.EC === 0) {
+        toast.success(response?.data?.EM);
+        navigate("/login");
+      } else {
+        toast.error(response?.data?.EM);
+      }
     }
   };
   return (
@@ -180,7 +187,7 @@ const Register = () => {
             <label className={cx("register-item-label")}>Điện thoại:</label>
             <input
               className={cx("register-item-input")}
-              name="mobile"
+              name="phone"
               type="text"
               onChange={handleOnChange}
             />

@@ -13,7 +13,7 @@ const HeaderAdmin = () => {
     <div className={cx("wrapper")}>
       <div className={cx("title")}>Dashboard</div>
       <div className={cx("search")}>
-        <input className={cx("input")} />
+        <input className={cx("input")} placeholder="Tìm kiếm ..." />
       </div>
       <div className={cx("social")}>
         <div className={cx("setting")}>

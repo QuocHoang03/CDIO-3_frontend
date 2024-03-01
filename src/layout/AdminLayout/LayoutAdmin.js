@@ -5,7 +5,6 @@ import classNames from "classnames/bind";
 import styles from "./LayoutAdmin.module.scss";
 import HeaderAdmin from "./components/HeaderAdmin/HeaderAdmin";
 import SliderAdmin from "./components/SliderAdmin/SliderAdmin";
-import FooterAdmin from "./components/FooterAdmin/FooterAdmin";
 
 const cx = classNames.bind(styles);
 
@@ -17,7 +16,6 @@ const LayoutAdmin = ({ children }) => {
         <div className={cx("container")}>
           <HeaderAdmin />
           {children}
-          <FooterAdmin />
         </div>
       </div>
     </div>

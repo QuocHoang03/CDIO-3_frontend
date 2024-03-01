@@ -147,19 +147,21 @@
 }
 
 .container {
-    width         : var(--with-global);
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
-    margin-bottom : 44px;
+    width            : var(--with-global);
+    display          : flex;
+    flex-direction   : column;
+    // align-items   : center;
+    margin-bottom    : 44px;
 
     .heading {
-        position     : relative;
-        color        : var(--primary);
-        font-size    : 3rem;
-        font-weight  : 600;
-        line-height  : 36px;
-        margin-bottom: 40px;
+        display        : flex;
+        justify-content: center;
+        position       : relative;
+        color          : var(--primary);
+        font-size      : 3rem;
+        font-weight    : 600;
+        line-height    : 36px;
+        margin-bottom  : 40px;
     }
 
     .heading::before {
@@ -178,6 +180,20 @@
         display  : flex;
         flex-wrap: wrap;
         gap      : 2rem;
+    }
+
+    // pagination
+    .page {
+        display        : flex;
+        justify-content: flex-end;
+        margin-top     : 20px;
+        height         : 36px;
+
+        .hello {
+            --bs-pagination-padding-x: 1rem;
+            --bs-pagination-padding-y: 0.35rem;
+            --bs-pagination-font-size: 1.6rem;
+        }
     }
 }
 

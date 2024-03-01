@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { FaFacebookF } from "react-icons/fa";
 import { SiYoutube, SiZalo } from "react-icons/si";
-import { AiOutlineMail } from "react-icons/ai";
+// import { AiOutlineMail } from "react-icons/ai";
 
 //
 import styles from "./Footer.module.scss";

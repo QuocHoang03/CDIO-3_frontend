@@ -8,6 +8,8 @@ import { PiSignOut } from "react-icons/pi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoSettingsOutline } from "react-icons/io5";
+import { TbUserCog } from "react-icons/tb";
+import { RiListRadio } from "react-icons/ri";
 import config from "../../../../config";
 
 const cx = classNames.bind(styles);
@@ -39,9 +41,17 @@ const SliderAdmin = () => {
           <RxDashboard className={cx("list-icon")} />
           <span className={cx("list-content")}>Dashboard</span>
         </Link>
+        <Link className={cx("list-item")} to={`/${config.routes.userAdmin}`}>
+          <TbUserCog className={cx("list-icon")} />
+          <span className={cx("list-content")}>Users</span>
+        </Link>
+        <Link className={cx("list-item")} to={`/${config.routes.roleAdmin}`}>
+          <RiListRadio className={cx("list-icon")} />
+          <span className={cx("list-content")}>Roles</span>
+        </Link>
         <Link className={cx("list-item")} to={`/${config.routes.orderAdmin}`}>
           <MdOutlineShoppingCart className={cx("list-icon")} />
-          <span className={cx("list-content")}>Order</span>
+          <span className={cx("list-content")}>Orders</span>
         </Link>
         <Link className={cx("list-item")} to={`/${config.routes.productAdmin}`}>
           <HiOutlineShoppingBag className={cx("list-icon")} />

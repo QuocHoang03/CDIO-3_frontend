@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState, createContext } from "react";
-import { FaRegHeart } from "react-icons/fa";
+// import { FaRegHeart } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
@@ -67,12 +67,12 @@ const Header = () => {
               <FiSearch />
             </Link>
           </div>
-          <div className={cx("social-category")}>
+          {/* <div className={cx("social-category")}>
             <div className={cx("social-category-link")}>
               <FaRegHeart />
               <div className={cx("car-quantity")}>0</div>
             </div>
-          </div>
+          </div> */}
           <div className={cx("social-category")}>
             <Link to={`/${config.routes.cart}`} className={cx("social-category-link")}>
               <FiShoppingCart />

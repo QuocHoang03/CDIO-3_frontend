@@ -1,9 +1,9 @@
 import classNames from "classnames/bind";
-
-import styles from "./Login.module.scss";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import styles from "./Login.module.scss";
+import { loginUser } from "../../services/userService";
 
 const cx = classNames.bind(styles);
 
@@ -12,21 +12,16 @@ const Login = () => {
     window.scrollTo(0, 0);
   }, []);
   const [data, setData] = useState({
-    email: "",
+    valueLogin: "",
     password: "",
   });
   const isCheckInputs = () => {
-    if (!data.email) {
-      toast("Vui lòng nhập email");
+    if (!data.valueLogin) {
+      toast("Vui lòng nhập email hoặc số điện thoại");
       return false;
     }
     if (!data.password) {
       toast("Vui lòng nhập mật khẩu");
-      return false;
-    }
-    let regular = /\S+@\S+\.\S+/;
-    if (!regular.test(data.email)) {
-      toast("Địa chỉ email không hợp lệ");
       return false;
     }
     return true;
@@ -45,7 +40,13 @@ const Login = () => {
     e.preventDefault();
     let isCheck = isCheckInputs();
     if (isCheck === true) {
-      console.log(data);
+      let response = await loginUser(data);
+      console.log(response);
+      if (response.data && response.data.EC === 0) {
+        toast.success(response.data.EM);
+      } else {
+        toast.error(response.data.EM);
+      }
     }
   };
   return (
@@ -61,10 +62,10 @@ const Login = () => {
         <form className={cx("form-login")}>
           <h1 className={cx("heading")}>Đăng Nhâp</h1>
           <div className={cx("login-item")}>
-            <label className={cx("login-item-label")}>E-mail:</label>
+            <label className={cx("login-item-label")}>E-mail or Phone:</label>
             <input
               className={cx("login-item-input")}
-              name="email"
+              name="valueLogin"
               type="text"
               onChange={handleOnChange}
             />

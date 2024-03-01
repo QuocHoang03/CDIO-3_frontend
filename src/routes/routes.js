@@ -13,6 +13,7 @@ import BaoGia from "../Pages/BaoGia";
 import PhanHoi from "../Pages/PhanHoi";
 import TuyenDung from "../Pages/TuyenDung";
 import Cart from "../Pages/Cart";
+import CheckOut from "../Pages/CheckOut";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 
@@ -24,6 +25,8 @@ import MauKhachSan from "../Pages/MauKhachSan";
 
 // Admin Page
 import HomeAdmin from "../PageAdmin/Home";
+import RoleAdmin from "../PageAdmin/Roles";
+import UserAdmin from "../PageAdmin/User";
 import OrderAdmin from "../PageAdmin/Order";
 import ProductAdmin from "../PageAdmin/Products";
 import SettingAdmin from "../PageAdmin/Settings";
@@ -40,7 +43,7 @@ const publicRoutes = [
   {
     path: config.routes.homeDetail,
     component: HomeDetail,
-    layout: HeadlessLayout,
+    layout: DefaultLayout,
     // layout: DefaultLayout,
   },
   {
@@ -71,7 +74,12 @@ const publicRoutes = [
   {
     path: config.routes.cart,
     component: Cart,
-    layout: DefaultLayout,
+    layout: HeadlessLayout,
+  },
+  {
+    path: config.routes.checkout,
+    component: CheckOut,
+    layout: HeadlessLayout,
   },
   {
     path: config.routes.login,
@@ -108,6 +116,16 @@ const publicRoutes = [
   {
     path: config.routes.homeAdmin,
     component: HomeAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.userAdmin,
+    component: UserAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.roleAdmin,
+    component: RoleAdmin,
     layout: AdminLayout,
   },
   {

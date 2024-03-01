@@ -30,7 +30,7 @@ const Search = ({ blockSearchFullscreen, handleClose }) => {
     setLoading(true);
     const fetchApi = async () => {
       setLoading(true);
-      const result = await axios.get(`${process.env.REACT_APP_SERVER_DOMAIN}/product/search`, {
+      const result = await axios.get(``, {
         params: {
           q: debounceValue,
           type: 5,

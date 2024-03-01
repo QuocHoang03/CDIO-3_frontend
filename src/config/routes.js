@@ -8,6 +8,7 @@ const routes = {
   phanHoi: "phan-hoi",
   tuyenDung: "tuyen-dung",
   cart: "cart",
+  checkout: "checkout",
   register: "register",
   login: "login",
   // sub page
@@ -17,7 +18,9 @@ const routes = {
   mauKhachSanDep: "mau-khach-san-dep",
   // admin
   homeAdmin: "admin",
-  orderAdmin: "admin/order",
+  userAdmin: "admin/users",
+  roleAdmin: "admin/roles",
+  orderAdmin: "admin/orders",
   productAdmin: "admin/products",
   settingAdmin: "admin/settings",
   signOutAdmin: "admin/sign-out",

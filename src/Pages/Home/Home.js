@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import ReactPaginate from "react-paginate";
 import classNames from "classnames/bind";
 import styles from "./Home.module.scss";
 import { FaSearch } from "react-icons/fa";
@@ -45,6 +46,10 @@ const Home = () => {
   const handleSubmitSearch = (e) => {
     e.preventDefault();
     console.log(data);
+  };
+  // pagination
+  const handlePageClick = (event) => {
+    console.log(event.selected);
   };
   return (
     <>
@@ -222,6 +227,29 @@ const Home = () => {
           <ProductItemBlock />
           <ProductItemBlock />
           <ProductItemBlock />
+        </div>
+        <div className={cx("page")}>
+          <ReactPaginate
+            className={cx("pagination", "hello")}
+            nextLabel="Next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={11}
+            previousLabel="< Prev"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
         </div>
       </div>
       <div className={cx("bg-feedback")}>
