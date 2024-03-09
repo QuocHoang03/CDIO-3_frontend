@@ -128,7 +128,6 @@ const ModalCreateUser = (props) => {
             [item]: false,
           };
         });
-        // toast.error(`Empty input ${item}`);
         check = false;
         return false;
       }
@@ -143,18 +142,18 @@ const ModalCreateUser = (props) => {
 
   const getGroups = async () => {
     let response = await readGroup();
-    if (response && response.data && response.data.EC === 0) {
-      setUserGroups(response.data.DT);
-      if (response.data.DT && response.data.DT.length > 0) {
+    if (response && response.EC === 0) {
+      setUserGroups(response.DT);
+      if (response.DT && response.DT.length > 0) {
         setData((prev) => {
           return {
             ...prev,
-            groupId: response.data.DT[0].id,
+            groupId: response.DT[0].id,
           };
         });
       }
     } else {
-      toast.error(response.data.EM);
+      toast.error(response.EM);
     }
   };
 
@@ -164,8 +163,8 @@ const ModalCreateUser = (props) => {
     let isCheckTextEmpty = isCheckInputs();
     if (isCheckBorder && isCheckTextEmpty) {
       let response = await createUser(data);
-      if (response.data && response.data.EC === 1) {
-        let dataValid = response.data.DT;
+      if (response && response.EC === 1) {
+        let dataValid = response.DT;
         console.log(dataValid);
         setValidInputs((prev) => {
           return {
@@ -174,8 +173,8 @@ const ModalCreateUser = (props) => {
           };
         });
       }
-      if (response.data && response.data.EC === 0) {
-        toast.success(response.data.EM);
+      if (response && response.EC === 0) {
+        toast.success(response.EM);
         props.handleClose();
         props.fetchUsers();
         setData((prev) => {
@@ -190,7 +189,7 @@ const ModalCreateUser = (props) => {
           };
         });
       } else {
-        toast.error(response.data.EM);
+        toast.error(response.EM);
       }
     }
   };

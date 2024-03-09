@@ -6,15 +6,21 @@ import { IoMenuOutline, IoAddOutline } from "react-icons/io5";
 import { LuListTree } from "react-icons/lu";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import { TfiReload } from "react-icons/tfi";
 // import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const cx = classNames.bind(styles);
 
 const Order = () => {
-  const fakeDemoArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const fakeDemoArray = [1, 2];
   const handlePageClick = (event) => {
     console.log(event.selected);
   };
+
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <div className={cx("wrapper")}>
@@ -24,6 +30,10 @@ const Order = () => {
             <span>Products</span>
           </div>
           <div className={cx("heading-right")}>
+            <button className={cx("btn-create")} onClick={handleReload}>
+              <TfiReload className={cx("btn-icon-reload")} />
+              <span>Reload</span>
+            </button>
             <button className={cx("btn-create")}>
               <IoAddOutline className={cx("btn-icon")} />
               <span>New Product</span>

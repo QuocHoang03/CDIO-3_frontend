@@ -7,6 +7,7 @@ import { LuListTree } from "react-icons/lu";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { TfiReload } from "react-icons/tfi";
 
 const cx = classNames.bind(styles);
 
@@ -21,9 +22,13 @@ const Order = () => {
   const handleDelete = () => {
     toast("Chức năng đang phát triển");
   };
-  const fakeDemoArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const fakeDemoArray = [1, 2];
   const handlePageClick = (event) => {
     console.log(event.selected);
+  };
+
+  const handleReload = () => {
+    window.location.reload();
   };
   return (
     <>
@@ -34,6 +39,10 @@ const Order = () => {
             <span>Products</span>
           </div>
           <div className={cx("heading-right")}>
+            <button className={cx("btn-create")} onClick={handleReload}>
+              <TfiReload className={cx("btn-icon-reload")} />
+              <span>Reload</span>
+            </button>
             <button className={cx("btn-create")} onClick={handleNewProduct}>
               <IoAddOutline className={cx("btn-icon")} />
               <span>New Product</span>

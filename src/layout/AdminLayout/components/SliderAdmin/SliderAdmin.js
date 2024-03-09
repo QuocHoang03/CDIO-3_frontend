@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./SliderAdmin.module.scss";
 import { Link } from "react-router-dom";
@@ -15,6 +15,15 @@ import config from "../../../../config";
 const cx = classNames.bind(styles);
 
 const SliderAdmin = () => {
+  const [currentActive, setCurrentActive] = useState("");
+
+  // set current active
+  let url = window.location.pathname;
+  useEffect(() => {
+    let lastIndex = url.lastIndexOf("/");
+    let result = url.substring(lastIndex + 1);
+    setCurrentActive(result);
+  }, [url]);
   // add active slider
   useEffect(() => {
     const listItem = document.getElementsByClassName(styles["list-item"]);
@@ -30,38 +39,60 @@ const SliderAdmin = () => {
       return item;
     });
   }, []);
+
   return (
     <div className={cx("wrapper")}>
-      <Link className={cx("heading")}>
-        <MdDashboard className={cx("heading-icon")} to={`/${config.routes.adminHome}`} />
+      <Link className={cx("heading")} to={`/${config.routes.homeAdmin}`}>
+        <MdDashboard className={cx("heading-icon")} />
         <span>WanFit</span>
       </Link>
       <div className={cx("list")}>
-        <Link className={cx("list-item", "active")} to={`/${config.routes.homeAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "dashboard" ? "active" : "")}
+          to={`/${config.routes.homeAdmin}`}
+        >
           <RxDashboard className={cx("list-icon")} />
           <span className={cx("list-content")}>Dashboard</span>
         </Link>
-        <Link className={cx("list-item")} to={`/${config.routes.userAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "users" ? "active" : "")}
+          to={`/${config.routes.userAdmin}`}
+        >
           <TbUserCog className={cx("list-icon")} />
           <span className={cx("list-content")}>Users</span>
         </Link>
-        <Link className={cx("list-item")} to={`/${config.routes.roleAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "roles" ? "active" : "")}
+          to={`/${config.routes.roleAdmin}`}
+        >
           <RiListRadio className={cx("list-icon")} />
           <span className={cx("list-content")}>Roles</span>
         </Link>
-        <Link className={cx("list-item")} to={`/${config.routes.orderAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "orders" ? "active" : "")}
+          to={`/${config.routes.orderAdmin}`}
+        >
           <MdOutlineShoppingCart className={cx("list-icon")} />
           <span className={cx("list-content")}>Orders</span>
         </Link>
-        <Link className={cx("list-item")} to={`/${config.routes.productAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "products" ? "active" : "")}
+          to={`/${config.routes.productAdmin}`}
+        >
           <HiOutlineShoppingBag className={cx("list-icon")} />
           <span className={cx("list-content")}>Products</span>
         </Link>
-        <Link className={cx("list-item")} to={`/${config.routes.settingAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "settings" ? "active" : "")}
+          to={`/${config.routes.settingAdmin}`}
+        >
           <IoSettingsOutline className={cx("list-icon")} />
           <span className={cx("list-content")}>Settings</span>
         </Link>
-        <Link className={cx("list-item")} to={`/${config.routes.signOutAdmin}`}>
+        <Link
+          className={cx("list-item", currentActive === "sign-out" ? "active" : "")}
+          to={`/${config.routes.signOutAdmin}`}
+        >
           <PiSignOut className={cx("list-icon")} />
           <span className={cx("list-content")}>Sign Out</span>
         </Link>

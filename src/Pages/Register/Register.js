@@ -90,11 +90,11 @@ const Register = () => {
     let isCheck = isCheckInputs();
     if (isCheck === true) {
       let response = await registerUser(data);
-      if (+response?.data?.EC === 0) {
-        toast.success(response?.data?.EM);
+      if (+response?.EC === 0) {
+        toast.success(response?.EM);
         navigate("/login");
       } else {
-        toast.error(response?.data?.EM);
+        toast.error(response?.EM);
       }
     }
   };

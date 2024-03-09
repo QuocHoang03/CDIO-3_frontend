@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./Login.module.scss";
@@ -8,6 +9,7 @@ import { loginUser } from "../../services/userService";
 const cx = classNames.bind(styles);
 
 const Login = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -42,10 +44,11 @@ const Login = () => {
     if (isCheck === true) {
       let response = await loginUser(data);
       console.log(response);
-      if (response.data && response.data.EC === 0) {
-        toast.success(response.data.EM);
+      if (response && response.EC === 0) {
+        toast.success(response.EM);
+        navigate("/");
       } else {
-        toast.error(response.data.EM);
+        toast.error(response.EM);
       }
     }
   };

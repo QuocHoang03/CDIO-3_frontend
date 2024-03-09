@@ -39,22 +39,10 @@ const ModalEditUser = (props) => {
       toast("Please Enter First Name");
       return false;
     }
-    // if (!data.phone) {
-    //   toast("Please Enter Phone");
-    //   return false;
-    // }
-    // if (!data.email) {
-    //   toast("Please Enter Email");
-    //   return false;
-    // }
     if (!data.sex) {
       toast("Please Select Sex");
       return false;
     }
-    // if (!data.groupId) {
-    //   toast("Please Select Group");
-    //   return false;
-    // }
     let regular = /\S+@\S+\.\S+/;
     if (!regular.test(data.email)) {
       toast("Địa chỉ email không hợp lệ");
@@ -100,7 +88,6 @@ const ModalEditUser = (props) => {
             [item]: false,
           };
         });
-        // toast.error(`Empty input ${item}`);
         check = false;
         return false;
       }
@@ -115,18 +102,18 @@ const ModalEditUser = (props) => {
 
   const getGroups = async () => {
     let response = await readGroup();
-    if (response && response.data && response.data.EC === 0) {
-      setUserGroups(response.data.DT);
-      if (response.data.DT && response.data.DT.length > 0) {
+    if (response && response.EC === 0) {
+      setUserGroups(response.DT);
+      if (response.DT && response.DT.length > 0) {
         setData((prev) => {
           return {
             ...prev,
-            groupId: response.data.DT[0].id,
+            groupId: response.DT[0].id,
           };
         });
       }
     } else {
-      toast.error(response.data.EM);
+      toast.error(response.EM);
     }
   };
   // Confirm
@@ -137,12 +124,12 @@ const ModalEditUser = (props) => {
       console.log(data);
       let response = await updateUser(data);
 
-      if (response.data && response.data.EC === 0) {
-        toast.success(response.data.EM);
+      if (response && response.EC === 0) {
+        toast.success(response.EM);
         props.handleClose();
         props.fetchUsers();
       } else {
-        toast.error(response.data.EM);
+        toast.error(response.EM);
       }
     }
   };
@@ -274,9 +261,6 @@ const ModalEditUser = (props) => {
                   onKeyPress={(e) => handlePressEnter(e)}
                   value={data && data.groupId}
                 >
-                  <option key={`groupId-${0}`} value={0}>
-                    {"Empty"}
-                  </option>
                   {userGroups.length > 0 &&
                     userGroups.map((item, index) => {
                       return (

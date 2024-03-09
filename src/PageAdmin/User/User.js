@@ -6,13 +6,12 @@ import { IoMenuOutline, IoAddOutline } from "react-icons/io5";
 import { LuListTree } from "react-icons/lu";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
-import axios from "axios";
 import ModalUserDelete from "./ModalUserDelete";
 import ModalEditUser from "./ModalEditUser/ModalEditUser";
 import ModalCreateUser from "./ModalCreateUser";
 import { toast } from "react-toastify";
 import { deleteUser, readUser } from "../../services/userService";
-// import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { TfiReload } from "react-icons/tfi";
 
 const cx = classNames.bind(styles);
 
@@ -39,12 +38,15 @@ const User = () => {
   };
   useEffect(() => {
     fetchUsers();
+    let c = document.cookie
+      .split(";")
+      .reduce((ac, cv, i) => Object.assign(ac, { [cv.split("=")[0]]: cv.split("=")[1] }), {});
   }, [currentPage]);
 
   const fetchUsers = async () => {
     let data = await readUser(currentPage, currentLimit);
     setListUsers(data);
-    setTotalPages(data?.data?.DT?.totalPages);
+    setTotalPages(data?.DT?.totalPages);
   };
 
   // Delete
@@ -58,11 +60,11 @@ const User = () => {
   };
   const handleConfirm = async () => {
     let response = await deleteUser(dataModalDelete.id);
-    if (response.data.EC === 0) {
+    if (response.EC === 0) {
       fetchUsers();
-      toast.success(response.data.EM);
+      toast.success(response?.EM);
     } else {
-      toast.error(response.data.EM);
+      toast.error(response?.EM);
     }
     setIsShowModalDelete(false);
   };
@@ -82,6 +84,10 @@ const User = () => {
     setIsShowModalCreate(true);
   };
 
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   const handleCloseCreate = () => {
     setIsShowModalCreate(false);
   };
@@ -94,6 +100,10 @@ const User = () => {
             <span>Products</span>
           </div>
           <div className={cx("heading-right")}>
+            <button className={cx("btn-create")} onClick={handleReload}>
+              <TfiReload className={cx("btn-icon-reload")} />
+              <span>Reload</span>
+            </button>
             <button className={cx("btn-create")} onClick={handleCreate}>
               <IoAddOutline className={cx("btn-icon")} />
               <span>New Product</span>
@@ -119,10 +129,8 @@ const User = () => {
                 <th>Action</th>
               </tr>
               {listUsers &&
-                listUsers.data &&
-                listUsers.data.DT &&
-                listUsers?.data?.DT?.users &&
-                listUsers?.data?.DT?.users.map((user, index) => {
+                listUsers.DT &&
+                listUsers.DT.users.map((user, index) => {
                   return (
                     <tr key={index} className={cx("row-inner")}>
                       <td>{(currentPage - 1) * currentLimit + index + 1}</td>

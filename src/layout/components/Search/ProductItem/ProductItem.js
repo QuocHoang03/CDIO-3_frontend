@@ -29,7 +29,7 @@ const ProductItem = ({ product }) => {
   return (
     <div className={cx("wrapper")} onClick={handleDetailProduct}>
       <div className={cx("avatar")}>
-        <img src={product?.imageAvt[0]} alt="" className={cx("avatar-img")} />
+        <img src={product?.imageAvt} alt="" className={cx("avatar-img")} />
       </div>
       <div className={cx("content")}>
         <div className={cx("title")}>{product?.title}</div>

@@ -48,6 +48,7 @@
             text-decoration : none;
             display         : block;
             background-color: #4e73fc;
+            margin-left     : 8px;
 
             .btn-icon {
                 color: #fff;
@@ -55,6 +56,12 @@
 
             &:hover {
                 opacity: 0.8;
+            }
+
+            .btn-icon-reload {
+                color       : #fff;
+                font-size   : 1.4rem;
+                margin-right: 4px;
             }
         }
 

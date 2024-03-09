@@ -30,13 +30,50 @@ const Search = ({ blockSearchFullscreen, handleClose }) => {
     setLoading(true);
     const fetchApi = async () => {
       setLoading(true);
-      const result = await axios.get(``, {
-        params: {
-          q: debounceValue,
-          type: 5,
+      // const result = await axios.get(``, {
+      //   params: {
+      //     q: debounceValue,
+      //     type: 5,
+      //   },
+      // });
+      // setSearchResult(result.data);
+      setSearchResult([
+        {
+          imageAvt:
+            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
+          title: "Nhà phố 2 tầng 4 phòng ngủ 5x16m",
+          price: 6990000,
+          percentDiscount: 10,
         },
-      });
-      setSearchResult(result.data);
+        {
+          imageAvt:
+            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
+          title: "Mẫu nhà 3 tầng 4 phòng ngủ 5x16m",
+          price: 6990000,
+          percentDiscount: 10,
+        },
+        {
+          imageAvt:
+            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
+          title: "Nhà phố 2 tầng 4 phòng ngủ 5x16m",
+          price: 6990000,
+          percentDiscount: 10,
+        },
+        {
+          imageAvt:
+            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
+          title: "Mẫu nhà 3 tầng 4 phòng ngủ 5x16m",
+          price: 6990000,
+          percentDiscount: 10,
+        },
+        {
+          imageAvt:
+            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
+          title: "Nhà phố 2 tầng 4 phòng ngủ 5x16m",
+          price: 6990000,
+          percentDiscount: 10,
+        },
+      ]);
       setLoading(false);
     };
     fetchApi();
