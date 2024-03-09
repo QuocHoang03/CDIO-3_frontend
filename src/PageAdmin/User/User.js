@@ -16,7 +16,7 @@ import { TfiReload } from "react-icons/tfi";
 const cx = classNames.bind(styles);
 
 const User = () => {
-  // Page
+  // Pagination
   const [listUsers, setListUsers] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
@@ -97,7 +97,7 @@ const User = () => {
         <h2 className={cx("heading")}>
           <div className={cx("heading-left")}>
             <IoMenuOutline className={cx("heading-icon")} />
-            <span>Products</span>
+            <span>Users</span>
           </div>
           <div className={cx("heading-right")}>
             <button className={cx("btn-create")} onClick={handleReload}>

@@ -50,4 +50,23 @@ const readGroup = () => {
   return axios.get(`/api/v1/group/read`);
 };
 
-export { loginUser, registerUser, createUser, readUser, updateUser, deleteUser, readGroup };
+// Role
+const readRole = (currentPage, currentLimit) => {
+  return axios.get(`/api/v1/role/read`, {
+    params: {
+      page: currentPage,
+      limit: currentLimit,
+    },
+  });
+};
+
+export {
+  loginUser,
+  registerUser,
+  createUser,
+  readUser,
+  updateUser,
+  deleteUser,
+  readGroup,
+  readRole,
+};
