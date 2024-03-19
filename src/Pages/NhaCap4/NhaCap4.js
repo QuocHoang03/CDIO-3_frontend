@@ -3,9 +3,16 @@ import classNames from "classnames/bind";
 import styles from "./NhaCap4.module.scss";
 import ProductItemBlockCategory from "../../layout/components/ProductItemBlockCategory/ProductItemBlockCategory";
 import ReactPaginate from "react-paginate";
+import { readProduct } from "../../services/userService";
 
 const cx = classNames.bind(styles);
 const NhaCap4 = () => {
+  // Pagination
+  const [productData, setProductData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLimit, setCurrentLimit] = useState(6);
+  const [totalPages, setTotalPages] = useState(0);
+
   const listDemo = [1, 1, 1, 1];
   const listDemo2 = [1, 2, 3, 4, 5, 6, 7, 8];
   const listDemo3 = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -16,24 +23,38 @@ const NhaCap4 = () => {
     "Nhiều người xem nhất",
     "Đặt hàng nhiều nhất",
   ];
-  const listCategoryProductBl = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const [numberFloor, setNumberFloor] = useState(false);
   const [bedRoom, setBedRoom] = useState(false);
-  const [totalPages, setTotalPages] = useState(15);
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Page
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected + 1);
+  };
+
+  // Call Api
+  useEffect(() => {
+    fetchProducts();
+    setCurrentLimit(6);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+  const fetchProducts = async () => {
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split("/");
+    const lastPart = parts[parts.length - 1];
+    let data = await readProduct(currentPage, currentLimit, lastPart);
+    setProductData(data?.DT);
+    setTotalPages(data?.DT?.totalPages);
+  };
+
   const handleNumberFloor = (e) => {
     setNumberFloor(e.target.value);
   };
   const handleBedRoom = (e) => {
     setBedRoom(e.target.value);
-  };
-  // Page
-  const handlePageClick = (event) => {
-    setCurrentPage(event.selected + 1);
   };
   return (
     <div className={cx("wrapper")}>
@@ -65,7 +86,7 @@ const NhaCap4 = () => {
             <ul className={cx("list-number-floor")}>
               {listDemo2.map((arr, index) => {
                 return (
-                  <li key={`floor-${index}`} className={cx("list-item")}>
+                  <li key={`demo2-${index}`} className={cx("list-item")}>
                     <label
                       htmlFor={`check-number-floor-${index}`}
                       className={cx("bl-number", +numberFloor === +arr ? "active" : "")}
@@ -91,7 +112,7 @@ const NhaCap4 = () => {
             <ul className={cx("list-bed-room")}>
               {listDemo3.map((arr, index) => {
                 return (
-                  <li key={`floor-${index}`} className={cx("list-item")}>
+                  <li key={`demo3-${index}`} className={cx("list-item")}>
                     <label
                       htmlFor={`check-bed-room-${index}`}
                       className={cx("bl-number", +bedRoom === +arr ? "active" : "")}
@@ -116,12 +137,16 @@ const NhaCap4 = () => {
       <div className={cx("inner-right")}>
         <div className={cx("heading")}>
           {listDemo4.map((arr, index) => {
-            return <div className={cx("heading-item")}>{arr}</div>;
+            return (
+              <div key={`demo-${index}`} className={cx("heading-item")}>
+                {arr}
+              </div>
+            );
           })}
         </div>
         <div className={cx("product-list")}>
-          {listCategoryProductBl.map(() => {
-            return <ProductItemBlockCategory />;
+          {productData?.products.map((product, index) => {
+            return <ProductItemBlockCategory key={`product-${index}`} product={product} />;
           })}
         </div>
         {totalPages > 0 && (

@@ -13,7 +13,6 @@ const ProductItemBlock = (props) => {
   const formatNumber = (number) => {
     return number.toLocaleString("vi-VN");
   };
-  console.log(typeof props?.product?.imageAvatar[0]);
   return (
     <Link to={`/${props.product.slug}`} className={cx("product-item-block")}>
       <div className={cx("heart")}>

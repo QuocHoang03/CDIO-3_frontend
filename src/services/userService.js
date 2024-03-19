@@ -154,11 +154,12 @@ const createProduct = (data) => {
   });
 };
 
-const readProduct = (currentPage, currentLimit) => {
+const readProduct = (currentPage, currentLimit, category) => {
   return axios.get(`/api/v1/product/read`, {
     params: {
       page: currentPage,
       limit: currentLimit,
+      category: category,
     },
   });
 };

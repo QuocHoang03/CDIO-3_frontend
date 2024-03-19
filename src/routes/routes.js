@@ -48,7 +48,6 @@ const publicRoutes = [
     path: config.routes.homeDetail,
     component: HomeDetail,
     layout: DefaultLayout,
-    // layout: DefaultLayout,
   },
   {
     path: config.routes.dichVu,
