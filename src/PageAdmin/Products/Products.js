@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import classNames from "classnames/bind";
 import styles from "./Products.module.scss";
@@ -8,25 +8,88 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { TfiReload } from "react-icons/tfi";
+import { deleteProduct, readProduct } from "../../services/userService";
+import ModalProductDelete from "./ModalProductDelete";
+import ModalProductCreate from "./ModalProductCreate";
+import ModalProductEdit from "./ModalProductEdit/ModalProductEdit";
 
 const cx = classNames.bind(styles);
 
-const Order = () => {
-  const handleNewProduct = (e) => {
-    e.preventDefault();
-    toast("Chức năng đang phát triển");
-  };
-  const handleUpdate = () => {
-    toast("Chức năng đang phát triển");
-  };
-  const handleDelete = () => {
-    toast("Chức năng đang phát triển");
-  };
-  const fakeDemoArray = [1, 2];
+const Products = () => {
+  // Pagination
+  const [listDataProduct, setListDataProduct] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLimit, setCurrentLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+
+  // Delete
+  const [isShowModalDelete, setIsShowModalDelete] = useState(false);
+  const [dataModelDelete, setDataModalDelete] = useState([]);
+
+  // Edit
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+  const [dataModalEdit, setDataModalEdit] = useState({});
+
+  // Create
+  const [isShowModalCreate, setIsShowModalCreate] = useState(false);
+
+  // Page
   const handlePageClick = (event) => {
-    console.log(event.selected);
+    setCurrentPage(event.selected + 1);
   };
 
+  useEffect(() => {
+    fetchProducts();
+    setCurrentLimit(10);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  const fetchProducts = async () => {
+    let data = await readProduct(currentPage, currentLimit);
+    setListDataProduct(data);
+    setTotalPages(data?.DT?.totalPages);
+  };
+
+  // Delete
+  const handleDelete = async (role) => {
+    setIsShowModalDelete(true);
+    setDataModalDelete(role);
+  };
+  const handleCloseModelDelete = () => {
+    setIsShowModalDelete(false);
+  };
+
+  const handleConfirmModelDelete = async () => {
+    let resDelete = await deleteProduct(dataModelDelete.id);
+    if (resDelete.EC === 0) {
+      fetchProducts();
+      toast.success(resDelete.EM);
+    } else {
+      toast.error(resDelete.EM);
+    }
+    setIsShowModalDelete(false);
+  };
+
+  // Edit
+  const handleEdit = (user) => {
+    setIsShowModalEdit(true);
+    setDataModalEdit(user);
+  };
+
+  const handleCloseEdit = () => {
+    setIsShowModalEdit(false);
+  };
+
+  // Create
+  const handleCreate = () => {
+    setIsShowModalCreate(true);
+  };
+
+  const handleCloseCreate = () => {
+    setIsShowModalCreate(false);
+  };
+
+  // Reload
   const handleReload = () => {
     window.location.reload();
   };
@@ -43,7 +106,7 @@ const Order = () => {
               <TfiReload className={cx("btn-icon-reload")} />
               <span>Reload</span>
             </button>
-            <button className={cx("btn-create")} onClick={handleNewProduct}>
+            <button className={cx("btn-create")} onClick={handleCreate}>
               <IoAddOutline className={cx("btn-icon")} />
               <span>New Product</span>
             </button>
@@ -60,63 +123,83 @@ const Order = () => {
                   </div>
                 </th>
                 <th>Title</th>
-                <th>Published at</th>
-                <th>enabled</th>
+                <th>Price</th>
+                <th>Category</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {fakeDemoArray.map((index) => {
-                return (
-                  <tr key={index} className={cx("row-inner")}>
-                    <td>{index}</td>
-                    <td>Phạm Quốc Hoàng</td>
-                    <td>2024-11-1</td>
-                    <td>
-                      <input className={cx("input-checkbox")} type="checkbox" />
-                    </td>
-                    <td>
-                      <div className={cx("action")}>
-                        <div className={cx("action-upd")} onClick={handleUpdate}>
-                          <FaRegEdit className={cx("action-upd-icon")} />
+              {listDataProduct &&
+                listDataProduct.DT &&
+                listDataProduct.DT.products &&
+                listDataProduct.DT.products.map((product, index) => {
+                  return (
+                    <tr key={index} className={cx("row-inner")}>
+                      <td>{(currentPage - 1) * currentLimit + index + 1}</td>
+                      <td>{product?.title}</td>
+                      <td>{product?.price}</td>
+                      <td>{product?.Category?.name}</td>
+                      <td>
+                        <div className={cx("action")}>
+                          <div className={cx("action-upd")} onClick={() => handleEdit(product)}>
+                            <FaRegEdit className={cx("action-upd-icon")} />
+                          </div>
+                          <div className={cx("action-del")} onClick={() => handleDelete(product)}>
+                            <MdDeleteForever className={cx("action-del-icon")} />
+                          </div>
                         </div>
-                        <div className={cx("action-del")} onClick={handleDelete}>
-                          <MdDeleteForever className={cx("action-del-icon")} />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
       </div>
-      <div className={cx("page")}>
-        <ReactPaginate
-          className={cx("pagination", "hello")}
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={11}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-        />
-      </div>
+      {totalPages > 0 && (
+        <div className={cx("page")}>
+          <ReactPaginate
+            className={cx("pagination", "hello")}
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={totalPages}
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </div>
+      )}
+      <ModalProductDelete
+        show={isShowModalDelete}
+        handleClose={handleCloseModelDelete}
+        handleConfirm={handleConfirmModelDelete}
+        dataModel={dataModelDelete}
+      />
+      <ModalProductCreate
+        show={isShowModalCreate}
+        handleClose={handleCloseCreate}
+        fetchProducts={fetchProducts}
+      />
+      <ModalProductEdit
+        show={isShowModalEdit}
+        handleClose={handleCloseEdit}
+        dataModalEdit={dataModalEdit}
+        fetchProducts={fetchProducts}
+      />
     </>
   );
 };
 
-export default Order;
+export default Products;

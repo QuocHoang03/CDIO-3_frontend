@@ -16,6 +16,7 @@ import Cart from "../Pages/Cart";
 import CheckOut from "../Pages/CheckOut";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
+import Logout from "../Pages/Logout";
 
 // Sub page
 import NhaCap4 from "../Pages/NhaCap4";
@@ -25,10 +26,13 @@ import MauKhachSan from "../Pages/MauKhachSan";
 
 // Admin Page
 import HomeAdmin from "../PageAdmin/Home";
+import GroupAdmin from "../PageAdmin/Groups";
+import GroupRoleAdmin from "../PageAdmin/GroupRole";
 import RoleAdmin from "../PageAdmin/Roles";
 import UserAdmin from "../PageAdmin/User";
-import OrderAdmin from "../PageAdmin/Order";
 import ProductAdmin from "../PageAdmin/Products";
+import CategoryAdmin from "../PageAdmin/Category";
+import OrderAdmin from "../PageAdmin/Order";
 import SettingAdmin from "../PageAdmin/Settings";
 import SignOutAdmin from "../PageAdmin/SignOut";
 
@@ -91,6 +95,11 @@ const publicRoutes = [
     component: Register,
     layout: HeadlessLayout,
   },
+  {
+    path: config.routes.logout,
+    component: Logout,
+    layout: HeadlessLayout,
+  },
   // Sub page
   {
     path: config.routes.nhaCap4Dep,
@@ -124,18 +133,33 @@ const publicRoutes = [
     layout: AdminLayout,
   },
   {
+    path: config.routes.groupAdmin,
+    component: GroupAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.groupRoleAdmin,
+    component: GroupRoleAdmin,
+    layout: AdminLayout,
+  },
+  {
     path: config.routes.roleAdmin,
     component: RoleAdmin,
     layout: AdminLayout,
   },
   {
-    path: config.routes.orderAdmin,
-    component: OrderAdmin,
+    path: config.routes.productAdmin,
+    component: ProductAdmin,
     layout: AdminLayout,
   },
   {
-    path: config.routes.productAdmin,
-    component: ProductAdmin,
+    path: config.routes.categoryAdmin,
+    component: CategoryAdmin,
+    layout: AdminLayout,
+  },
+  {
+    path: config.routes.orderAdmin,
+    component: OrderAdmin,
     layout: AdminLayout,
   },
   {

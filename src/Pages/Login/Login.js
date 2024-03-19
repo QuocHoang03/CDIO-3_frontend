@@ -43,7 +43,12 @@ const Login = () => {
     let isCheck = isCheckInputs();
     if (isCheck === true) {
       let response = await loginUser(data);
-      console.log(response);
+      let currentDataUsers = response?.DT?.dataUsers;
+      let currentRoleName = response?.DT?.groupWithRoles?.name;
+      let resDataUsers = { currentDataUsers, currentRoleName };
+      // add localStorage user
+      localStorage.setItem("dataUsers", JSON.stringify(resDataUsers));
+
       if (response && response.EC === 0) {
         toast.success(response.EM);
         navigate("/");

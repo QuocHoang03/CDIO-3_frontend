@@ -172,16 +172,6 @@ const Register = () => {
               </label>
             </div>
           </div>
-          {/* address */}
-          {/* <div className={cx("register-item")}>
-            <label className={cx("register-item-label")}>Địa chỉ:</label>
-            <input
-              className={cx("register-item-input")}
-              name="address"
-              type="text"
-              onChange={handleOnChange}
-            />
-          </div> */}
           {/* phone */}
           <div className={cx("register-item")}>
             <label className={cx("register-item-label")}>Điện thoại:</label>

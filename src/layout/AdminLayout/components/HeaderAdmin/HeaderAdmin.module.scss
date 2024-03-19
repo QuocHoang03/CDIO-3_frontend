@@ -51,9 +51,12 @@
     }
 
     .user {
-        display     : flex;
-        align-items : center;
-        margin-right: 10px;
+        display        : flex;
+        align-items    : center;
+        margin-right   : 10px;
+        text-decoration: none;
+        color          : #000;
+        cursor         : pointer;
 
         .user-icon {
             font-size: 3rem;

@@ -3,22 +3,34 @@ import { Link } from "react-router-dom";
 //
 import config from "../../../config";
 import styles from "./Header.module.scss";
+import { useEffect, useState } from "react";
+import { readJWT } from "../../../services/userService";
 
 const cx = classNames.bind(styles);
 
 const User = ({ icon }) => {
-  const user = false;
-  const role = false;
-  const lastName = 1;
-  const firstName = 1;
-  // const user = !!localStorage.getItem("user");
-  // const role = localStorage.getItem("role");
-  // // const email = localStorage.getItem("email");
-  // const lastName = localStorage.getItem("lastName");
-  // const firstName = localStorage.getItem("firstName");
+  const [dataUsers, setDataUsers] = useState();
+  const [cookie, setCookie] = useState();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    // Get localStorage
+    const user = JSON.parse(localStorage.getItem("dataUsers"));
+    setDataUsers(user);
+    // Call api JWT
+    fetchJWT();
+  }, []);
+
+  const fetchJWT = async () => {
+    const resJWT = await readJWT();
+    setCookie(resJWT?.DT?.jwt);
+  };
+
   return (
     <div className={cx("social-category-user")}>
-      {user ? (
+      {!!dataUsers === true && !!cookie === true ? (
         <div className={cx("social-category-link")}>{icon}</div>
       ) : (
         <Link className={cx("social-category-link")} to={`/${config.routes.login}`}>
@@ -28,50 +40,56 @@ const User = ({ icon }) => {
 
       <div className={cx("subnav-user")}>
         {/* no user */}
-        {!user && (
-          <Link className={cx("subnav-user-link")} to={`/${config.routes.register}`}>
-            Tạo tài khoản ngay
-          </Link>
-        )}
-        {!user && (
-          <Link className={cx("subnav-user-link")} to={`/${config.routes.login}`}>
-            Đăng nhập
-          </Link>
-        )}
-        {/* exist user */}
-        {user && role === "user" && (
+        {(!!dataUsers === false || !!cookie === false || (!!dataUsers === !!cookie) === false) && (
           <>
-            {/* <a className={cx("subnav-user-link")} href={`/${config.routes.quanLy}`}>
-              Quản lý
-            </a>
-            <a className={cx("subnav-user-link")} href={`/${config.routes.createProduct}`}>
-              Thêm sản phẩm
-            </a> */}
-            <div className={cx("subnav-user-link")}>
-              {lastName}
-              {firstName}
-            </div>
-            <a className={cx("subnav-user-link")} href={`/${config.routes.logout}`}>
-              Đăng xuất
-            </a>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.register}`}>
+              Tạo tài khoản ngay
+            </Link>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.login}`}>
+              Đăng nhập
+            </Link>
           </>
         )}
-        {/* Admin */}
-        {user && role === "admin" && (
+        {/* Customer */}
+        {!!dataUsers === true && dataUsers?.currentRoleName === "Customer" && !!cookie === true && (
           <>
             <div className={cx("subnav-user-link")}>
-              {lastName}
-              {firstName}
+              {dataUsers?.currentDataUsers?.lastName} {dataUsers?.currentDataUsers?.firstName}{" "}
+              {`(${dataUsers?.currentRoleName})`}
             </div>
-            <a className={cx("subnav-user-link")} href={`/${config.routes.quanLy}`}>
-              Quản lý
-            </a>
-            <a className={cx("subnav-user-link")} href={`/${config.routes.createProduct}`}>
-              Thêm sản phẩm
-            </a>
-            <a className={cx("subnav-user-link")} href={`/${config.routes.logout}`}>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.logout}`}>
               Đăng xuất
-            </a>
+            </Link>
+          </>
+        )}
+        {/* Dev */}
+        {!!dataUsers === true && dataUsers?.currentRoleName === "Dev" && !!cookie === true && (
+          <>
+            <div className={cx("subnav-user-link")}>
+              {dataUsers?.currentDataUsers?.lastName} {dataUsers?.currentDataUsers?.firstName}{" "}
+              {`(${dataUsers?.currentRoleName})`}
+            </div>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.homeAdmin}`}>
+              Quản lý website (limit)
+            </Link>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.logout}`}>
+              Đăng xuất
+            </Link>
+          </>
+        )}
+        {/* Leader */}
+        {!!dataUsers === true && dataUsers?.currentRoleName === "Leader" && !!cookie === true && (
+          <>
+            <div className={cx("subnav-user-link")}>
+              {dataUsers?.currentDataUsers?.lastName} {dataUsers?.currentDataUsers?.firstName}{" "}
+              {`(${dataUsers?.currentRoleName})`}
+            </div>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.homeAdmin}`}>
+              Quản lý website
+            </Link>
+            <Link className={cx("subnav-user-link")} to={`/${config.routes.logout}`}>
+              Đăng xuất
+            </Link>
           </>
         )}
       </div>

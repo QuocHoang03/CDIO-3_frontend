@@ -4,6 +4,7 @@ import styles from "./HomeDetail.module.scss";
 import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 import { FaRegSquare } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import { GrPrevious, GrNext } from "react-icons/gr";
 
 import {
   FiLayers,
@@ -17,6 +18,8 @@ import {
   FiHash,
 } from "react-icons/fi";
 import ContactOrder from "../../layout/components/ContactOrder/ContactOrder";
+import { useParams } from "react-router-dom";
+import { readProductDetail } from "../../services/userService";
 
 const cx = classNames.bind(styles);
 
@@ -24,21 +27,30 @@ const HomeDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const arrDemo = [1, 1, 1, 1, 1, 1, 1, 1, 1];
-  const arrDemo2 = [
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-    "https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg",
-  ];
+
+  const { slug } = useParams();
+  const [productData, setProductData] = useState();
+  const [srcAvatar, setSrcAvatar] = useState();
   const [overflow, setOverflow] = useState(false);
+  const [indexNextImageAvatar, setIndexNextImageAvatar] = useState(0);
+  const [indexNextImageDetail, setIndexNextImageDetail] = useState();
   const refImgSub = useRef();
+
+  // Call Api
+  useEffect(() => {
+    fetchProducts(slug);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  const fetchProducts = async (slug) => {
+    let data = await readProductDetail(slug);
+    setProductData(data?.DT);
+    setSrcAvatar(data?.DT?.imageAvatar[0]);
+  };
+  const formatNumber = (number) => {
+    return number.toLocaleString("vi-VN");
+  };
+
   const handleLeft = () => {
     refImgSub.current.scrollLeft -= 80;
   };
@@ -46,26 +58,78 @@ const HomeDetail = () => {
     refImgSub.current.scrollLeft += 80;
   };
 
-  const handleShowImg = async (arr) => {
+  // Avatar
+  const handleShowImgAvt = async (src, index) => {
+    setSrcAvatar(src);
+    setIndexNextImageAvatar(index);
+  };
+
+  // Detail
+  const handleShowImg = async (arr, index) => {
+    setIndexNextImageDetail(index);
     await setOverflow(true);
     let imgHtml = await document.getElementsByClassName(`${styles.imgSrc}`);
     let imgArray = await Array.from(imgHtml);
     imgArray[0].src = arr;
   };
-
   const handleCloseImg = () => {
     setOverflow(false);
+    setIndexNextImageAvatar(0);
+    setIndexNextImageDetail(undefined);
   };
+
+  const handlePrevImageDetail = async () => {
+    if (indexNextImageAvatar >= 0 && indexNextImageDetail === undefined) {
+      setIndexNextImageAvatar((prev) => prev - 1);
+      let imgHtml = await document.getElementsByClassName(`${styles.imgSrc}`);
+      let imgArray = await Array.from(imgHtml);
+      if (productData.imageAvatar[indexNextImageAvatar - 1]) {
+        imgArray[0].src = productData.imageAvatar[indexNextImageAvatar - 1];
+      } else {
+        setOverflow(false);
+      }
+    }
+    if (indexNextImageDetail >= 0) {
+      setIndexNextImageDetail((prev) => prev - 1);
+      let imgHtml = await document.getElementsByClassName(`${styles.imgSrc}`);
+      let imgArray = await Array.from(imgHtml);
+      if (productData.imageDetail[indexNextImageDetail - 1]) {
+        imgArray[0].src = productData.imageDetail[indexNextImageDetail - 1];
+      } else {
+        setOverflow(false);
+      }
+    }
+  };
+  const handleNextImageDetail = async () => {
+    if (indexNextImageAvatar >= 0 && indexNextImageDetail === undefined) {
+      setIndexNextImageAvatar((prev) => prev + 1);
+      let imgHtml = await document.getElementsByClassName(`${styles.imgSrc}`);
+      let imgArray = await Array.from(imgHtml);
+      if (productData.imageAvatar[indexNextImageAvatar + 1]) {
+        imgArray[0].src = productData.imageAvatar[indexNextImageAvatar + 1];
+      } else {
+        setOverflow(false);
+      }
+    }
+    if (indexNextImageDetail >= 0) {
+      setIndexNextImageDetail((prev) => prev + 1);
+      let imgHtml = await document.getElementsByClassName(`${styles.imgSrc}`);
+      let imgArray = await Array.from(imgHtml);
+      if (productData.imageDetail[indexNextImageDetail + 1]) {
+        imgArray[0].src = productData.imageDetail[indexNextImageDetail + 1];
+      } else {
+        setOverflow(false);
+      }
+    }
+  };
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("inner")}>
         <div className={cx("information")}>
-          <div className={cx("title")}>Nhà phố 2 tầng 4 phòng ngủ 5x16m</div>
-          <div className={cx("img-avatar")}>
-            <img
-              src="https://sieuthibanve.com/upload/images/202202/151617-products-2021-11-30-1638234751-pc3.png"
-              alt=""
-            />
+          <div className={cx("title")}>{productData?.title}</div>
+          <div className={cx("img-avatar")} onClick={() => handleShowImg(srcAvatar)}>
+            <img src={`${srcAvatar}`} alt="" />
           </div>
           <div className={cx("img-sub")}>
             <div className={cx("img-sub-icon")}>
@@ -77,13 +141,14 @@ const HomeDetail = () => {
               </div>
             </div>
             <div className={cx("img-sub-list")} ref={refImgSub}>
-              {arrDemo.map((arr, index) => {
+              {productData?.imageAvatar.map((imgAvatar, index) => {
                 return (
-                  <div key={index} className={cx("img-sub-item")}>
-                    <img
-                      src="https://sieuthibanve.com/upload/images/202202/151617-products-2021-11-30-1638234751-pc2.png"
-                      alt=""
-                    />
+                  <div
+                    key={index}
+                    className={cx("img-sub-item")}
+                    onClick={() => handleShowImgAvt(imgAvatar, index)}
+                  >
+                    <img src={`${imgAvatar}`} alt="" />
                   </div>
                 );
               })}
@@ -102,7 +167,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Số tầng</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>3</td>
+                    <td className={cx("text")}>{productData?.numberOfFloors}</td>
                   </tr>
                   <tr>
                     <th>
@@ -111,7 +176,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Diện tích</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>247m2</td>
+                    <td className={cx("text")}>{productData?.width * productData?.length}m2</td>
                   </tr>
                   <tr>
                     <th>
@@ -120,7 +185,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Chiều dài</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>16m</td>
+                    <td className={cx("text")}>{productData?.length}m</td>
                   </tr>
                   <tr>
                     <th>
@@ -138,7 +203,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Thiết kế bởi</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>WanFit</td>
+                    <td className={cx("text")}>QuocHoangIT</td>
                   </tr>
                 </tbody>
               </table>
@@ -151,7 +216,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Phòng ngủ</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>4</td>
+                    <td className={cx("text")}>{productData?.roomNumber}</td>
                   </tr>
                   <tr>
                     <th>
@@ -160,7 +225,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Mặt tiền</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>5m</td>
+                    <td className={cx("text")}>{productData?.facade}m</td>
                   </tr>
                   <tr>
                     <th>
@@ -169,7 +234,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Loại hình</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>Nhà phố</td>
+                    <td className={cx("text")}>{productData?.Category?.name}</td>
                   </tr>
                   <tr>
                     <th>
@@ -187,7 +252,7 @@ const HomeDetail = () => {
                         <span className={cx("text")}>Mã SP</span>
                       </div>
                     </th>
-                    <td className={cx("text")}>BV2038</td>
+                    <td className={cx("text")}>{productData?.productCode}</td>
                   </tr>
                 </tbody>
               </table>
@@ -201,14 +266,14 @@ const HomeDetail = () => {
       <div className={cx("detail-product")}>
         <div className={cx("title")}>Chi tiết sản phẩm</div>
         <div className={cx("block-img")}>
-          {arrDemo2.map((arr, index) => {
+          {productData?.imageDetail.map((imgDetail, index) => {
             return (
               <img
-                key={index}
+                key={`imgDetail-${index}`}
                 className={cx("detail-img")}
-                src="https://sieuthibanve.com/upload/images/202112/181508-bv2038---01.jpg"
+                src={`${imgDetail}`}
                 alt=""
-                onClick={() => handleShowImg(arr)}
+                onClick={() => handleShowImg(imgDetail, index)}
               />
             );
           })}
@@ -217,6 +282,10 @@ const HomeDetail = () => {
           <div className={cx("overflow-img")}>
             <IoIosClose className={cx("overflow-close")} onClick={handleCloseImg} />
             <img className={cx("imgSrc")} src="" alt="" />
+            <div className={cx("prev-next")}>
+              <GrPrevious className={cx("icon")} onClick={handlePrevImageDetail} />
+              <GrNext className={cx("icon")} onClick={handleNextImageDetail} />
+            </div>
           </div>
         )}
       </div>

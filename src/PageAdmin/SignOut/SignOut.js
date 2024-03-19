@@ -1,11 +1,32 @@
-import React from "react";
-import classNames from "classnames/bind";
-import styles from "./SignOut.module.scss";
-
-const cx = classNames.bind(styles);
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { logoutUser } from "../../services/userService";
 
 const SignOut = () => {
-  return <div className={cx("wrapper")}>SignOut</div>;
+  const navigate = useNavigate();
+  useEffect(() => {
+    const handleLogoutUser = async () => {
+      try {
+        const response = await logoutUser();
+        if (response.EC === 0) {
+          localStorage.removeItem("dataUsers");
+          toast.success(response.EM);
+          navigate("/");
+        } else {
+          toast.error(response.EM);
+        }
+      } catch (error) {
+        console.log("Lỗi trong quá trình đăng xuất: ", error);
+      }
+    };
+    const handleLogout = () => {
+      handleLogoutUser();
+    };
+    handleLogout();
+  });
+
+  return <div>Logging out...</div>;
 };
 
 export default SignOut;

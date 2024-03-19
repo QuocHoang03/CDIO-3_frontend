@@ -29,6 +29,7 @@ const User = () => {
   // Edit
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [dataModalEdit, setDataModalEdit] = useState({});
+
   // Create
   const [isShowModalCreate, setIsShowModalCreate] = useState(false);
 
@@ -38,9 +39,8 @@ const User = () => {
   };
   useEffect(() => {
     fetchUsers();
-    let c = document.cookie
-      .split(";")
-      .reduce((ac, cv, i) => Object.assign(ac, { [cv.split("=")[0]]: cv.split("=")[1] }), {});
+    setCurrentLimit(10);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const fetchUsers = async () => {
@@ -84,12 +84,12 @@ const User = () => {
     setIsShowModalCreate(true);
   };
 
-  const handleReload = () => {
-    window.location.reload();
-  };
-
   const handleCloseCreate = () => {
     setIsShowModalCreate(false);
+  };
+
+  const handleReload = () => {
+    window.location.reload();
   };
   return (
     <>
@@ -106,7 +106,7 @@ const User = () => {
             </button>
             <button className={cx("btn-create")} onClick={handleCreate}>
               <IoAddOutline className={cx("btn-icon")} />
-              <span>New Product</span>
+              <span>New User</span>
             </button>
           </div>
         </h2>

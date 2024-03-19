@@ -56,9 +56,17 @@ const ModalEditUser = (props) => {
     }
     return true;
   };
+
+  // Call Api Group
   useEffect(() => {
     let currentGroupId = props?.dataModalEdit?.groupId;
-    setData({ ...props.dataModalEdit, groupId: currentGroupId ? currentGroupId : 0 });
+    setData((prev) => {
+      return {
+        ...prev,
+        ...props.dataModalEdit,
+        groupId: currentGroupId ? currentGroupId : "",
+      };
+    });
   }, [props.dataModalEdit]);
 
   const handleOnChange = (e) => {
@@ -99,18 +107,17 @@ const ModalEditUser = (props) => {
   useEffect(() => {
     getGroups();
   }, []);
-
   const getGroups = async () => {
     let response = await readGroup();
     if (response && response.EC === 0) {
       setUserGroups(response.DT);
       if (response.DT && response.DT.length > 0) {
-        setData((prev) => {
-          return {
-            ...prev,
-            groupId: response.DT[0].id,
-          };
-        });
+        // setData((prev) => {
+        //   return {
+        //     ...prev,
+        //     groupId: response.DT[0].id,
+        //   };
+        // });
       }
     } else {
       toast.error(response.EM);
@@ -121,7 +128,6 @@ const ModalEditUser = (props) => {
     let isCheckBorder = checkValidateInputs();
     let isCheckTextEmpty = isCheckInputs();
     if (isCheckBorder && isCheckTextEmpty) {
-      console.log(data);
       let response = await updateUser(data);
 
       if (response && response.EC === 0) {

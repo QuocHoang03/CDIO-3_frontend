@@ -44,7 +44,7 @@ const SliderAdmin = () => {
     <div className={cx("wrapper")}>
       <Link className={cx("heading")} to={`/${config.routes.homeAdmin}`}>
         <MdDashboard className={cx("heading-icon")} />
-        <span>WanFit</span>
+        <span>QHoangiT</span>
       </Link>
       <div className={cx("list")}>
         <Link
@@ -62,6 +62,20 @@ const SliderAdmin = () => {
           <span className={cx("list-content")}>Users</span>
         </Link>
         <Link
+          className={cx("list-item", currentActive === "groups" ? "active" : "")}
+          to={`/${config.routes.groupAdmin}`}
+        >
+          <RiListRadio className={cx("list-icon")} />
+          <span className={cx("list-content")}>Groups</span>
+        </Link>
+        <Link
+          className={cx("list-item", currentActive === "group-role" ? "active" : "")}
+          to={`/${config.routes.groupRoleAdmin}`}
+        >
+          <RiListRadio className={cx("list-icon")} />
+          <span className={cx("list-content")}>Group-Role</span>
+        </Link>
+        <Link
           className={cx("list-item", currentActive === "roles" ? "active" : "")}
           to={`/${config.routes.roleAdmin}`}
         >
@@ -69,18 +83,25 @@ const SliderAdmin = () => {
           <span className={cx("list-content")}>Roles</span>
         </Link>
         <Link
-          className={cx("list-item", currentActive === "orders" ? "active" : "")}
-          to={`/${config.routes.orderAdmin}`}
-        >
-          <MdOutlineShoppingCart className={cx("list-icon")} />
-          <span className={cx("list-content")}>Orders</span>
-        </Link>
-        <Link
           className={cx("list-item", currentActive === "products" ? "active" : "")}
           to={`/${config.routes.productAdmin}`}
         >
           <HiOutlineShoppingBag className={cx("list-icon")} />
           <span className={cx("list-content")}>Products</span>
+        </Link>
+        <Link
+          className={cx("list-item", currentActive === "categorys" ? "active" : "")}
+          to={`/${config.routes.categoryAdmin}`}
+        >
+          <HiOutlineShoppingBag className={cx("list-icon")} />
+          <span className={cx("list-content")}>Categorys</span>
+        </Link>
+        <Link
+          className={cx("list-item", currentActive === "orders" ? "active" : "")}
+          to={`/${config.routes.orderAdmin}`}
+        >
+          <MdOutlineShoppingCart className={cx("list-icon")} />
+          <span className={cx("list-content")}>Orders</span>
         </Link>
         <Link
           className={cx("list-item", currentActive === "settings" ? "active" : "")}

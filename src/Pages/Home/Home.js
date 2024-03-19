@@ -8,10 +8,16 @@ import config from "../../config";
 import Feedback from "./Feedback";
 import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 import ProductItemBlock from "../../layout/components/ProductItemBlock/ProductItemBlock";
+import { readProduct } from "../../services/userService";
 
 const cx = classNames.bind(styles);
 
 const Home = () => {
+  const [listDataProduct, setListDataProduct] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLimit, setCurrentLimit] = useState(8);
+  const [totalPages, setTotalPages] = useState(0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -22,6 +28,24 @@ const Home = () => {
     width: "",
     length: "",
   });
+
+  // Call api product
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected + 1);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    setCurrentLimit(8);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  const fetchProducts = async () => {
+    let data = await readProduct(currentPage, currentLimit);
+    setListDataProduct(data);
+    setTotalPages(data?.DT?.totalPages);
+  };
+
   const handleOnChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -45,12 +69,8 @@ const Home = () => {
   }, 4000);
   const handleSubmitSearch = (e) => {
     e.preventDefault();
-    console.log(data);
   };
-  // pagination
-  const handlePageClick = (event) => {
-    console.log(event.selected);
-  };
+
   return (
     <>
       {/*  */}
@@ -219,14 +239,9 @@ const Home = () => {
       <div className={cx("container")}>
         <div className={cx("heading")}>1000 Mẫu thiết kế nhà đẹp ở Việt Nam</div>
         <div className={cx("product-list")}>
-          <ProductItemBlock />
-          <ProductItemBlock />
-          <ProductItemBlock />
-          <ProductItemBlock />
-          <ProductItemBlock />
-          <ProductItemBlock />
-          <ProductItemBlock />
-          <ProductItemBlock />
+          {listDataProduct?.DT?.products.map((product, index) => {
+            return <ProductItemBlock key={`product-${index}`} product={product} />;
+          })}
         </div>
         <div className={cx("page")}>
           <ReactPaginate
@@ -235,7 +250,7 @@ const Home = () => {
             onPageChange={handlePageClick}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
-            pageCount={11}
+            pageCount={totalPages}
             previousLabel="< Prev"
             pageClassName="page-item"
             pageLinkClassName="page-link"

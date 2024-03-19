@@ -5,7 +5,7 @@ import styles from "./Settings.module.scss";
 const cx = classNames.bind(styles);
 
 const Settings = () => {
-  return <div className={cx("wrapper")}>settingAdmin</div>;
+  return <div className={cx("wrapper")}></div>;
 };
 
 export default Settings;
