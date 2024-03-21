@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./ContactOrder.module.scss";
-import { FaChevronDown } from "react-icons/fa";
-import { FiShoppingCart } from "react-icons/fi";
+import { FaChevronDown, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { createHeart, readJWT } from "../../../services/userService";
+import { toast } from "react-toastify";
 
 const cx = classNames.bind(styles);
 
-const ContactOrder = () => {
+const ContactOrder = (props) => {
+  const [dataUsers, setDataUsers] = useState();
+  const [cookie, setCookie] = useState();
+
+  useEffect(() => {
+    // Get localStorage
+    const user = JSON.parse(localStorage.getItem("dataUsers"));
+    setDataUsers(user);
+    // Call api JWT
+    fetchJWT();
+  }, [dataUsers, cookie]);
+
+  const fetchJWT = async () => {
+    const resJWT = await readJWT();
+    setCookie(resJWT?.DT?.jwt);
+  };
+  // Call Api
+  const handleAddHeart = async (e) => {
+    e.preventDefault();
+    if (!!dataUsers === true && !!cookie === true) {
+      let data = await createHeart(props.productData);
+      if (data.EC === 0) {
+        toast.success(data.EM);
+      } else {
+        toast.error(data.EM);
+      }
+    } else {
+      toast.error("Vui lòng đăng nhập");
+    }
+  };
   return (
     <div>
       <form className={cx("contact-form")}>
@@ -62,16 +92,10 @@ const ContactOrder = () => {
           <div className={cx("price")}>6,990,000 ₫</div>
         </div>
         <p className={cx("note")}>Bạn chưa cần phải thanh toán tiền ở bước này</p>
-        {/* <div className={cx("two-btn")}> */}
-        {/* <button className={cx("btn", "cl-white", "fl-1", "mr-6")}>
+        <button className={cx("btn", "cl-white", "fl-1")} onClick={(e) => handleAddHeart(e)}>
           <FaRegHeart className={cx("icon")} />
-          Thêm yêu thích
-        </button> */}
-        <button className={cx("btn", "cl-white", "fl-1")}>
-          <FiShoppingCart className={cx("icon")} />
-          Thêm vào giỏ hàng
+          Thêm vào yêu thích
         </button>
-        {/* </div> */}
         <Link to={"/checkout"} className={cx("btn", "cl-primary")}>
           Mua Ngay
         </Link>

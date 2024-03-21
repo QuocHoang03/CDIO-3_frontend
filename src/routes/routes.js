@@ -12,7 +12,7 @@ import DuAn from "../Pages/DuAn";
 import BaoGia from "../Pages/BaoGia";
 import PhanHoi from "../Pages/PhanHoi";
 import TuyenDung from "../Pages/TuyenDung";
-import Cart from "../Pages/Cart";
+import Heart from "../Pages/Heart";
 import CheckOut from "../Pages/CheckOut";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
@@ -35,6 +35,7 @@ import CategoryAdmin from "../PageAdmin/Category";
 import OrderAdmin from "../PageAdmin/Order";
 import SettingAdmin from "../PageAdmin/Settings";
 import SignOutAdmin from "../PageAdmin/SignOut";
+import NoLayout from "../layout/NoLayout";
 
 // Public routes
 const publicRoutes = [
@@ -75,14 +76,14 @@ const publicRoutes = [
     layout: DefaultLayout,
   },
   {
-    path: config.routes.cart,
-    component: Cart,
+    path: config.routes.heart,
+    component: Heart,
     layout: HeadlessLayout,
   },
   {
     path: config.routes.checkout,
     component: CheckOut,
-    layout: HeadlessLayout,
+    layout: DefaultLayout,
   },
   {
     path: config.routes.login,
@@ -97,7 +98,7 @@ const publicRoutes = [
   {
     path: config.routes.logout,
     component: Logout,
-    layout: HeadlessLayout,
+    layout: NoLayout,
   },
   // Sub page
   {

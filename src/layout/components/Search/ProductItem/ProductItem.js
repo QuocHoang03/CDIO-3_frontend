@@ -9,6 +9,7 @@ import { SearchValueContext } from "../Search";
 const cx = classNames.bind(styles);
 
 const ProductItem = ({ product }) => {
+  console.log(product);
   const ToggleSearch = useContext(ToggleSearchFullscreenContext);
   const setSearchValue = useContext(SearchValueContext);
   const navigate = useNavigate();
@@ -29,18 +30,18 @@ const ProductItem = ({ product }) => {
   return (
     <div className={cx("wrapper")} onClick={handleDetailProduct}>
       <div className={cx("avatar")}>
-        <img src={product?.imageAvt} alt="" className={cx("avatar-img")} />
+        <img src={product?.imageAvatar[0]} alt="" className={cx("avatar-img")} />
       </div>
       <div className={cx("content")}>
         <div className={cx("title")}>{product?.title}</div>
         <div className={cx("price")}>
           <div className={cx("price-new")}>
-            {product && formatNumber(priceDiscount)} <span>₫</span>
-          </div>
-          <div className={cx("price-old")}>
             {product && formatNumber(product?.price)} <span>₫</span>
           </div>
-          <div className={cx("price-percent")}>-{product?.percentDiscount}%</div>
+          {/* <div className={cx("price-old")}>
+            {product && formatNumber(product?.price)} <span>₫</span>
+          </div> */}
+          {/* <div className={cx("price-percent")}>-{product?.percentDiscount}%</div> */}
         </div>
         <div className={cx("price")}></div>
       </div>

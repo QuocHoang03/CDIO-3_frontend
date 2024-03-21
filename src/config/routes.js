@@ -7,7 +7,7 @@ const routes = {
   baoGia: "bao-gia",
   phanHoi: "phan-hoi",
   tuyenDung: "tuyen-dung",
-  cart: "cart",
+  heart: "heart",
   checkout: "checkout",
   register: "register",
   login: "login",

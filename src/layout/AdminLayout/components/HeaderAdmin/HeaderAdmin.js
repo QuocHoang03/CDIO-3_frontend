@@ -6,7 +6,6 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { PiUserCircleLight } from "react-icons/pi";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import config from "../../../../config";
 
 const cx = classNames.bind(styles);
 

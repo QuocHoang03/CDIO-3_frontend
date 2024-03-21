@@ -5,7 +5,6 @@ import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 import { FaRegSquare } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { GrPrevious, GrNext } from "react-icons/gr";
-
 import {
   FiLayers,
   FiSmartphone,
@@ -17,17 +16,15 @@ import {
   FiDollarSign,
   FiHash,
 } from "react-icons/fi";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import ContactOrder from "../../layout/components/ContactOrder/ContactOrder";
 import { useParams } from "react-router-dom";
-import { readProductDetail } from "../../services/userService";
+import { readHeart, readJWT, readProductDetail } from "../../services/userService";
 
 const cx = classNames.bind(styles);
 
 const HomeDetail = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+  const [isCheckHeart, setIsCheckHeart] = useState();
   const { slug } = useParams();
   const [productData, setProductData] = useState();
   const [srcAvatar, setSrcAvatar] = useState();
@@ -35,6 +32,43 @@ const HomeDetail = () => {
   const [indexNextImageAvatar, setIndexNextImageAvatar] = useState(0);
   const [indexNextImageDetail, setIndexNextImageDetail] = useState();
   const refImgSub = useRef();
+
+  // Check user
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const [dataUsers, setDataUsers] = useState();
+  const [cookie, setCookie] = useState();
+
+  useEffect(() => {
+    // Get localStorage
+    const user = JSON.parse(localStorage.getItem("dataUsers"));
+    setDataUsers(user);
+    // Call api JWT
+    fetchJWT();
+  }, [productData?.id]);
+
+  const fetchJWT = async () => {
+    const resJWT = await readJWT();
+    setCookie(resJWT?.DT?.jwt);
+  };
+
+  // Call Api
+  useEffect(() => {
+    if (!!dataUsers === true && !!cookie === true) {
+      fetchProductId(productData?.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataUsers, cookie, productData?.id]);
+  const fetchProductId = async () => {
+    let productId = productData?.id;
+    let data = await readHeart(null, null, productId);
+    if (data.EC === 0) {
+      setIsCheckHeart(true);
+    } else {
+      setIsCheckHeart(null);
+    }
+  };
 
   // Call Api
   useEffect(() => {
@@ -130,6 +164,17 @@ const HomeDetail = () => {
           <div className={cx("title")}>{productData?.title}</div>
           <div className={cx("img-avatar")} onClick={() => handleShowImg(srcAvatar)}>
             <img src={`${srcAvatar}`} alt="" />
+            <div className={cx("heart")}>
+              {!!dataUsers === true && !!cookie === true ? (
+                isCheckHeart ? (
+                  <FaHeart className={cx("heart-icon-fill")} />
+                ) : (
+                  <FaRegHeart className={cx("heart-icon-empty")} />
+                )
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
           <div className={cx("img-sub")}>
             <div className={cx("img-sub-icon")}>
@@ -260,7 +305,7 @@ const HomeDetail = () => {
           </div>
         </div>
         <div className={cx("contact")}>
-          <ContactOrder />
+          <ContactOrder productData={productData} />
         </div>
       </div>
       <div className={cx("detail-product")}>

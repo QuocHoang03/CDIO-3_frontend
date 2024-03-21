@@ -51,7 +51,7 @@ const Login = () => {
 
       if (response && response.EC === 0) {
         toast.success(response.EM);
-        navigate("/");
+        window.location.href = "/";
       } else {
         toast.error(response.EM);
       }

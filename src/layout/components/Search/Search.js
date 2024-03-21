@@ -3,11 +3,11 @@ import classNames from "classnames/bind";
 import { IoIosClose, IoIosSearch, IoMdCloseCircle } from "react-icons/io";
 import { FaSpinner } from "react-icons/fa";
 import HeadlessTippy from "@tippyjs/react/headless";
-import axios from "axios";
 
 import styles from "./Search.module.scss";
 import ProductItem from "./ProductItem/ProductItem";
 import useDebounce from "../../../hooks/useDebounce";
+import { readProduct } from "../../../services/userService";
 
 const cx = classNames.bind(styles);
 export const SearchValueContext = createContext(null);
@@ -30,50 +30,8 @@ const Search = ({ blockSearchFullscreen, handleClose }) => {
     setLoading(true);
     const fetchApi = async () => {
       setLoading(true);
-      // const result = await axios.get(``, {
-      //   params: {
-      //     q: debounceValue,
-      //     type: 5,
-      //   },
-      // });
-      // setSearchResult(result.data);
-      setSearchResult([
-        {
-          imageAvt:
-            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
-          title: "Nhà phố 2 tầng 4 phòng ngủ 5x16m",
-          price: 6990000,
-          percentDiscount: 10,
-        },
-        {
-          imageAvt:
-            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
-          title: "Mẫu nhà 3 tầng 4 phòng ngủ 5x16m",
-          price: 6990000,
-          percentDiscount: 10,
-        },
-        {
-          imageAvt:
-            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
-          title: "Nhà phố 2 tầng 4 phòng ngủ 5x16m",
-          price: 6990000,
-          percentDiscount: 10,
-        },
-        {
-          imageAvt:
-            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
-          title: "Mẫu nhà 3 tầng 4 phòng ngủ 5x16m",
-          price: 6990000,
-          percentDiscount: 10,
-        },
-        {
-          imageAvt:
-            "https://sieuthibanve.com/thumb/images/202202/151617-products-2021-11-30-1638234751-pc3.png",
-          title: "Nhà phố 2 tầng 4 phòng ngủ 5x16m",
-          price: 6990000,
-          percentDiscount: 10,
-        },
-      ]);
+      const result = await readProduct(1, 5, null, debounceValue);
+      setSearchResult(result.DT.products);
       setLoading(false);
     };
     fetchApi();
@@ -122,7 +80,7 @@ const Search = ({ blockSearchFullscreen, handleClose }) => {
                   <div className={cx("search-result")} tabIndex="-1" {...attrs}>
                     <h4 className={cx("result-title")}>Sản phẩm gợi ý</h4>
                     {searchResult.map((apiItem, index) => {
-                      return <ProductItem product={apiItem} key={index} />;
+                      return <ProductItem product={apiItem} key={`product-${index}`} />;
                     })}
                   </div>
                 );

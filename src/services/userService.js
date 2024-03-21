@@ -154,12 +154,14 @@ const createProduct = (data) => {
   });
 };
 
-const readProduct = (currentPage, currentLimit, category) => {
+const readProduct = (currentPage, currentLimit, category, search, ProductId) => {
   return axios.get(`/api/v1/product/read`, {
     params: {
       page: currentPage,
       limit: currentLimit,
       category: category,
+      search: search,
+      id: ProductId,
     },
   });
 };
@@ -212,6 +214,38 @@ const deleteCategory = (id) => {
   });
 };
 
+// CRUD Heart
+const createHeart = (data) => {
+  return axios.post(`/api/v1/heart/create`, {
+    data,
+  });
+};
+
+const readHeart = (currentPage, currentLimit, productId) => {
+  return axios.get(`/api/v1/heart/read`, {
+    params: {
+      page: currentPage,
+      limit: currentLimit,
+      productId: productId,
+    },
+  });
+};
+
+// const updateHeart = (data) => {
+//   return axios.put(`/api/v1/heart/update`, {
+//     data,
+//   });
+// };
+
+const deleteHeart = (id) => {
+  console.log(id);
+  return axios.delete(`/api/v1/heart/delete`, {
+    data: {
+      id: id,
+    },
+  });
+};
+
 export {
   loginUser,
   registerUser,
@@ -242,4 +276,7 @@ export {
   updateGroupRole,
   deleteGroupRole,
   readProductDetail,
+  createHeart,
+  readHeart,
+  deleteHeart,
 };
