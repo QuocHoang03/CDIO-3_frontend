@@ -83,7 +83,7 @@ const publicRoutes = [
   {
     path: config.routes.checkout,
     component: CheckOut,
-    layout: DefaultLayout,
+    layout: HeadlessLayout,
   },
   {
     path: config.routes.login,

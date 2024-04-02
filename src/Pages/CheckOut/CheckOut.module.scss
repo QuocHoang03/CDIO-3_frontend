@@ -123,7 +123,7 @@
             background-color: #ffffff;
 
             .inner-left {
-                float: 2;
+                flex: 2;
 
 
                 .bl-table {
@@ -145,7 +145,7 @@
                         }
 
                         .title-1 {
-                            width: 112px;
+                            width: 200px;
                         }
 
                         .title-2 {
@@ -182,12 +182,12 @@
                             }
 
                             .content-1 {
-                                width      : 112px;
+                                width      : 200px;
                                 display    : flex;
                                 align-items: center;
 
                                 img {
-                                    width  : 80px;
+                                    width  : 100%;
                                     display: block;
                                 }
                             }
@@ -197,18 +197,21 @@
                                 font-size: 1.6rem;
 
                                 .heading {
-                                    color      : #000;
-                                    font-weight: 500;
+                                    color        : #000;
+                                    font-weight  : 500;
+                                    margin-bottom: 10px;
                                 }
 
                                 .address {
-                                    color      : #86868B;
-                                    font-weight: 400;
+                                    color        : #86868B;
+                                    font-weight  : 400;
+                                    margin-bottom: 10px;
                                 }
 
                                 .color {
-                                    color      : #86868B;
-                                    font-weight: 400;
+                                    color        : #86868B;
+                                    font-weight  : 400;
+                                    margin-bottom: 10px;
                                 }
                             }
 
@@ -221,14 +224,13 @@
                                 width  : 145px;
 
                                 .quantity {
-                                    display            : flex;
-                                    align-items        : center;
-                                    justify-content    : space-between;
-                                    width              : 113px;
-                                    height             : 36px;
-                                    border-radius      : 8px;
-                                    // background-color: #f5f5f7;
-                                    background-color   : #fff;
+                                    display         : flex;
+                                    align-items     : center;
+                                    justify-content : space-between;
+                                    width           : 113px;
+                                    height          : 36px;
+                                    border-radius   : 8px;
+                                    background-color: #fff;
 
                                     .number {
                                         font-size: 1.6rem;
@@ -255,31 +257,6 @@
 
                                 }
                             }
-                        }
-                    }
-
-                    .bl-buy {
-                        display        : flex;
-                        justify-content: flex-end;
-                        width          : 100%;
-
-                        .buy {
-                            display         : flex;
-                            justify-content : center;
-                            align-items     : center;
-                            font-weight     : 500;
-                            width           : 180px;
-                            height          : 38px;
-                            color           : #0066CC;
-                            text-decoration : none;
-                            border-radius   : 8px;
-                            background-color: #fff;
-                            border          : 1px solid #0066CC;
-                            cursor          : pointer;
-                        }
-
-                        .buy:hover {
-                            box-shadow: 4px 4px 2px 0px #cdcdcd;
                         }
                     }
                 }
@@ -311,25 +288,15 @@
                         align-items: center;
                     }
 
-                    .title-1 {}
-
-                    .text-1 {}
-
                     .total-2 {
                         display    : flex;
                         align-items: center;
                     }
 
-                    .title-2 {}
-
-                    .text-2 {}
-
                     .total-3 {
                         display    : flex;
                         align-items: center;
                     }
-
-                    .title-3 {}
 
                     .text-3 {
                         font-size: 2.6rem;
@@ -339,6 +306,7 @@
                     .bl-btn {
                         display        : flex;
                         justify-content: flex-end;
+                        align-items    : center;
 
                         .btn {
                             font-size       : 1.4rem;
@@ -358,6 +326,30 @@
                         .btn:hover {
                             box-shadow: 4px 4px 2px 0px #cdcdcd;
                         }
+                    }
+                }
+
+                .bl-buy {
+                    display: flex;
+                    width  : 100%;
+
+                    .buy {
+                        display         : flex;
+                        justify-content : center;
+                        align-items     : center;
+                        font-weight     : 500;
+                        width           : 180px;
+                        height          : 38px;
+                        color           : #0066CC;
+                        text-decoration : none;
+                        border-radius   : 8px;
+                        background-color: #fff;
+                        border          : 1px solid #0066CC;
+                        cursor          : pointer;
+                    }
+
+                    .buy:hover {
+                        box-shadow: 4px 4px 2px 0px #cdcdcd;
                     }
                 }
             }

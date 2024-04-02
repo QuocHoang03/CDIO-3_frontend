@@ -305,7 +305,12 @@ const HomeDetail = () => {
           </div>
         </div>
         <div className={cx("contact")}>
-          <ContactOrder productData={productData} />
+          <ContactOrder
+            productData={productData}
+            dataUsers={dataUsers}
+            cookie={cookie}
+            isCheckHeart={isCheckHeart}
+          />
         </div>
       </div>
       <div className={cx("detail-product")}>

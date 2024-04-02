@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames/bind";
-import styles from "./CheckOut.module.scss";
 import { IoLocationSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-// import { HiMinus, HiPlus } from "react-icons/hi";
-import { GoTrash } from "react-icons/go";
+import { cx } from "./CheckOut";
 
-const cx = classNames.bind(styles);
-
-const CheckOut = () => {
+export const CheckOut = () => {
   const navigate = useNavigate();
   const [infoCustomer, setInfoCustomer] = useState();
   const [productData, setProductData] = useState();
@@ -16,14 +11,15 @@ const CheckOut = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const dataCustomer = JSON.parse(localStorage.getItem("dataCustomer"));
+    const { infoCustomer, productData } = dataCustomer;
     setInfoCustomer(dataCustomer.infoCustomer);
     setProductData(dataCustomer.productData);
+    console.log(">>>Check infoCustomer", infoCustomer);
+    console.log(">>>Check productData", productData);
   }, []);
 
   const handleCheckout = (e) => {
-    e.preventDefault();
-    console.log(">>>Check infoCustomer", infoCustomer);
-    console.log(">>>Check productData", productData);
+    // e.preventDefault();
   };
 
   const formatNumber = (number) => {
@@ -122,5 +118,3 @@ const CheckOut = () => {
     </>
   );
 };
-
-export default CheckOut;
